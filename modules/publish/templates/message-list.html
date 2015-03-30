@@ -1,0 +1,76 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-envelope"></i> </span>
+                    <h5>消息列表</h5>
+                    <ul class="nav nav-tabs pull-right">
+                        <li data-ng-click="changeType(0)" data-ng-class="{'active': msgType==0}"><a data-toggle="tab"><i class="icon-sitemap"></i> 系统</a></li>
+                        <li data-ng-click="changeType(1)" data-ng-class="{'active': msgType==1}"><a data-toggle="tab"><i class="icon-group"></i> 用户</a></li>
+                    </ul>
+                </div>
+                <div class="widget-content nopadding">
+                    <div class="dataTables_wrapper">
+                        <div class="dataTables_length form-horizontal">
+                            <div class="btn-group" data-ng-model="msgStatus" bs-buttons-radio>
+                                <button class="btn btn-info" type="button" value="0" data-ng-click="changeStatus(0)">未读</button>
+                                <button class="btn btn-info" type="button" value="1" data-ng-click="changeStatus(1)">已读</button>
+                            </div>
+                        </div>
+                        <table class="table table-bordered">
+                            <thread>
+                                <tr>
+                                    <th class="span3">来源</th>
+                                    <th>标题</th>
+                                    <th class="span3">时间</th>
+                                    <th class="span2">操作</th>
+                                </tr>
+                            </thread>
+                            <tbody>
+                                <tr data-ng-repeat="item in msgList">
+                                    <td class="center">
+                                        <span>
+                                            <a data-ng-href="#!/message/history/{{msgType}}/{{ (msgType == 1)?item.from:item.sid }}">{{item.who.name}}</a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span>{{item.title}}</span>
+                                    </td>
+                                    <td class="center">
+                                        <span>{{item.time | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                                    </td>
+                                    <td class="center">
+                                        <span>
+                                            <a data-ng-href="#!/message/{{msgType}}/{{item._id}}"><i class="icon-search"></i> <span class="text">查看</span></a>
+                                        </span>
+                                        <span data-ng-if="msgStatus">&nbsp;</span>
+                                        <span data-ng-if="msgStatus">
+                                            <a data-ng-click="deleteMsg(item._id)"><i class="icon-remove"></i> <span class="text">删除</span></a>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="ui-toolbar ui-widget-header">
+                            <div class="dataTables_filter"></div>
+                            <div class="dataTables_paginate">
+                                <button
+                                        class="btn"
+                                        data-ng-click="getData()"
+                                        data-ng-disabled="!hasManyData"
+                                        data-ng-hide="isLoading">
+                                        <span data-ng-switch on="hasManyData">
+                                            <span data-ng-switch-when="true"><i class="icon-download-alt"></i> 更多</span>
+                                            <span data-ng-switch-when="false"><i class="icon-twitter"></i> 暂无</span>
+                                        </span>
+                                </button>
+                                <img data-ng-show="isLoading" src="./img/loading.gif" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

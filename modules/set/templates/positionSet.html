@@ -1,0 +1,85 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+
+                <div class="widget-content nopadding">
+                    <div class="dataTables_wrapper">
+
+                        <table class="table table-bordered" style="border-bottom: 1px solid #cccccc;border-top: 1px solid #cccccc;" data-kz-table-fixed-header>
+                            <thead>
+                            <tr>
+                                <th class="center" style="width: 15%">
+                                    职务名称
+                                </th>
+                                <th class="hidden">
+                                    职务id
+                                </th>
+                                <th class="center">
+                                    时间设置（小时/一个工作日为8小时）
+                                </th>
+                                <th class="center" style="width: 10%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="center"><input class="span10" style="text-align: center;margin-top: 15%" type="text" ng-model="addPositionDataItem.positionName"/></td>
+                                    <td>
+                                        <div class="row-fluid">
+                                        <form action="#" method="get" name="addPositionForm" class="form-horizontal" style="width: 100%">
+                                            <div style="display: inline-block" ng-repeat="doingType in doingTypes">
+                                                <label style="display: inline-block" style="width: 200px" >
+                                                    <div style="display: inline-block;width: 85px;text-align: right;margin-right: 5px;">{{doingType.type}}</div>
+                                                    <input style="width: 60px" type="number" ng-model="addPositionDataItem['position'+doingType.id]" min="0" max="99999" required/>
+                                                </label>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </td>
+                                    <td class="center">
+                                            <button type="button" style="text-align: center;margin-top: 10%" class="btn btn-success" data-ng-disabled="!addPositionForm.$valid||!addPositionDataItem.positionName" data-ng-click="saveData()">
+                                                <i class="icon-save"></i> <span class="text">保存</span>
+                                            </button>
+                                            <a style="text-align: center;margin-top: 10%" class="btn btn-warning" data-ng-disabled="!addPositionDataItem" ng-click="addPositionDataItem={};">
+                                                <i class="icon-refresh"></i> <span class="text">重置</span>
+                                            </a>
+                                    </td>
+                                </tr>
+                                <!--<tr data-ng-repeat="positionDataItem in positionDataList">
+                                    <td class="center"><input class="span4" style="text-align: center" type="text" ng-model="positionDataItem.positionName"/></td>
+                                    <td class="center span1" ng-repeat="doingType in doingTypes">
+                                        <span ng-bind="getPositionDuration(positionDataItem.positionData,doingType)"></span>
+                                    </td>
+                                    <td class="center">
+                                        <button class="btn btn-info" ng-if="!item.$editing" ng-click="item.$editing = true">
+                                            <a href="" style="color: #ffffff"><i class="icon-edit"></i> 编辑</a>
+                                        </button>
+                                        <button class="btn btn-info" ng-if="item.$editing"  data-ng-click="saveEditData(item)" data-ng-disabled="item.salaryTypeId==null">
+                                            <a href="" style="color: #ffffff"><i class="icon-edit"></i> 保存</a>
+                                        </button>
+
+                                        <button class="btn btn-danger" data-trigger="click" data-unique="1" data-placement="left" data-title="提示" data-bs-popover="'deleteItem.html'">
+                                            <a href="" style="color: #ffffff"><i class="icon-remove"></i> 删除</a>
+                                        </button>
+                                    </td>
+                                </tr>-->
+                            </tbody>
+                        </table>
+                        <style>
+                            .gridStyle {
+                                border: 1px solid rgb(212, 212, 212);
+                                height: 350px
+                            }
+                        </style>
+                        <div class="gridStyle" ng-grid="gridOptions" style="width: 100%"></div>
+                        <div class="ui-toolbar ui-widget-header">
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

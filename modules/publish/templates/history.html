@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-envelope"></i> </span>
+                    <h5>历史消息</h5>
+                </div>
+                <div class="widget-content">
+                    <div class="chat-content">
+                        <div class="chat-messages">
+                            <div id="chat-messages-inner">
+                                <p class="user-linda" data-ng-repeat="item in msgList">
+                                    <span class="msg-block">
+                                        <strong>{{item.title}}</strong>
+                                        <span class="time"><span class="label">来源：{{(item.to == target)?"自己": item.who.name}}  <span>【<span am-time-ago="item.time"></span>】</span></span></span>
+                                        <span class="msg" data-ng-bind-html="item.message"></span>
+                                        <span class="opt">
+                                            <button class="btn btn-mini btn-danger" type="button" data-ng-click="deleteMsg(item._id)">删除</button>
+                                        </span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-toolbar ui-widget-header">
+                        <div class="dataTables_filter"></div>
+                        <div class="dataTables_paginate">
+                            <button
+                                    class="btn"
+                                    data-ng-click="getData()"
+                                    data-ng-disabled="!hasManyData"
+                                    data-ng-hide="isLoading">
+                                        <span data-ng-switch on="hasManyData">
+                                            <span data-ng-switch-when="true"><i class="icon-download-alt"></i> 更多</span>
+                                            <span data-ng-switch-when="false"><i class="icon-twitter"></i> 暂无</span>
+                                        </span>
+                            </button>
+                            <img data-ng-show="isLoading" src="./img/loading.gif" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

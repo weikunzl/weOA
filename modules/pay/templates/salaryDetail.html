@@ -1,0 +1,68 @@
+<div class="banner_area" style="margin: 0 18%;background: #ffffff;max-height: 400px;">
+    <div class="attendanceTimeListEdit" ><!-- style文件在ownStyle.css里 -->
+        <div class="modal-header">
+            <button type="button" style="margin:5px 10px 0 0;" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">【{{selectedInfoItem.employeeName}}】{{selectedInfoItem.time|date :'MM'}}月份详细信息</h4></h4>
+
+        </div>
+<div style="overflow:auto; max-height:450px;">
+       <table class="table table-hover table-bordered table-condensed" ng-show="salaryDetail&&salaryDetail.length>0">
+        <thead>
+        <tr>
+
+            <th class="span1"><span>日</span> </th>
+            <th class="span2" colspan="2" ><span >上午</span> </th>
+            <th class="span2"colspan="2" ><span >下午</span> </th>
+            <th ng-repeat="doingType in doingTypes"><span ng-bind="doingType.type"></span> </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="salaryData in salaryDetail">
+            <td class="center span1" >
+                <span ng-bind="salaryData.day"></span>
+            </td>
+            <td class="center span1" >
+                <span ng-show="salaryData.beginTimeAM==0" >-</span>
+                <span ng-show="salaryData.beginTimeAM!=0"  ng-class="{'text-error':salaryData.beginTimeAM!=morningWorkTimeMinute}" ng-bind="getTimeByMinute(salaryData.beginTimeAM)"></span>
+            </td>
+            <td class="center span1" >
+                <span ng-show="salaryData.endTimeAM==0" >-</span>
+                <span ng-show="salaryData.endTimeAM!=0" ng-class="{'text-error':salaryData.endTimeAM!=noonRestTimeMinute}" ng-bind="getTimeByMinute(salaryData.endTimeAM)"></span>
+            </td>
+            <td class="center span1" >
+                <span ng-show="salaryData.beginTimePM==0" >-</span>
+                <span ng-show="salaryData.beginTimePM!=0" ng-class="{'text-error':salaryData.beginTimePM!=afternoonWorkTimeMinute}" ng-bind="getTimeByMinute(salaryData.beginTimePM)"></span>
+            </td>
+            <td class="center span1" >
+                <span ng-show="salaryData.endTimePM==0" >-</span>
+                <span ng-show="salaryData.endTimePM!=0" ng-class="{'text-error':salaryData.endTimePM!=afternoonRestTimeMinute}" ng-bind="getTimeByMinute(salaryData.endTimePM)"></span>
+            </td>
+            <td class="center span1" ng-repeat="doingType in doingTypes">
+                <span ng-show="salaryData.doingType" ng-bind="getDoingTypeTime(salaryData,doingType)"></span>
+                <span ng-show="!salaryData.doingType">-</span>
+            </td>
+        </tr>
+        </tbody>
+           <tr >
+               <td colspan="5">合计时长</td>
+               <td class="center span1" ng-repeat="doingType_temp in doingTypes">
+                   <span ng-bind="getDoingTimeItemValue(doingType_temp,selectedInfoItem.totalTimeData)"></span>
+               </td>
+           </tr>
+           <tr >
+               <td>合计薪资</td>
+<!--
+               <td colspan="2">{{selectedInfo.totalMainSalary}}</td>
+-->
+               <td colspan="2">￥{{selectedInfoItem.totalSalaryContainCost}}</td>
+               <td colspan="2">￥{{selectedInfoItem.totalSalary}}</td>
+               <td class="center span1" ng-repeat="doingType_temp in doingTypes">
+                   <span ng-bind="getDoingTimeItemValue(doingType_temp,selectedInfoItem.totalCostData)"></span>
+               </td>
+           </tr>
+           </tfoot>
+    </table>
+    <h3 ng-show="!(salaryDetail&&salaryDetail.length>0)" style="text-align: center;margin: 60px;">没有【{{selectedInfoItem.employeeName}}】{{selectedInfoItem.time|date :'MM'}}月份加班、请假、调休的信息</h3>
+</div>
+</div>
+</div>

@@ -1,0 +1,154 @@
+.deptTreePanel_toolbar button{
+    margin-left: 10px;
+}
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+.clearfix {
+    display: inline-table;
+}
+* html .clearfix {
+    height: 1%;
+}
+.clearfix {
+    display: block;
+}
+
+.main_cont {
+    position: absolute;
+    top: 20%;
+    /*right: 10%;*/
+
+}
+.main_cont .wrapper {
+    background: #FFF;
+    margin: 10px;
+    position: relative;
+    z-index: 5;
+    height: 375px;
+    border-radius: 5px;
+}
+
+.main_cont .title {
+    border-radius: 5px;
+    padding-top: 40px;
+    background-color: #ffffff;
+}
+
+.main_cont .title_info{
+    background-color: #37465d;
+    height: 50px;
+    text-align: center;
+    font-family: "微软雅黑";
+    color: #ffffff;
+    font-size: 20px;
+    font-family: 'microsoft yahei';
+    line-height: 250%;
+}
+
+.main_cont .icon{
+    border: 1px solid #bebebe;
+    border-radius: 3px;
+    width: 45px;
+    height: 40px;
+    float: left;
+}
+
+.main_cont .icon img{
+    margin: 13px;
+}
+
+.main_cont .bg {
+    width: 100%;
+    height: 100%;
+    background: #CCC;
+    filter: alpha(opacity=50);
+    -khtml-opacity: 0.5;
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+}
+
+.xl_info {
+    margin: 20px;
+}
+
+.xl_info dd {
+    margin-top: 20px;
+}
+
+.xl_info dd input {
+    border: 1px solid #e0e0e0;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    margin-left: -2px;
+    width: 250px;
+    height: 32px;
+    line-height: 30px;
+    margin-left: -5px;
+}
+
+.xl_info dd hr{
+    border:0;
+    background-color:#e6e7e8;
+    height:1px;
+}
+
+/* 按钮 */
+.login-btn {
+    color: #ffffff;
+    border: 0;
+    width: 305px;
+    height: 40px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: 'microsoft yahei';
+    font-weight: bold;
+    background-image: url('../img/login_btn_enable.png');
+    cursor: pointer;
+}
+.login-btn[disabled]{
+    background-image: url('../img/login_btn_disabled.png');
+    cursor: default;
+}
+
+.carousel-indicators{
+    top: 625px;
+}
+
+.carousel-indicators li{
+    background-image: url("../img/login_scroll.png");
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.carousel-indicators .active{
+    background-image: url("../img/login_scroll_active.png");
+    background-color: rgba(255,255,255, 0);
+}
+
+.attendanceTimeListEdit{
+    background: #ffffff;
+    position: absolute;
+    top: 20%;
+    right: -40%;
+    width: 1000px;
+}
+.attendanceTimeListEdit .wrapper{
+    background: #FFF;
+    margin: 10px;
+    position: relative;
+    z-index: 5;
+    height: 375px;
+    border-radius: 5px;
+}

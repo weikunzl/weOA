@@ -1,0 +1,275 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html
+        class="no-js ie6 oldie"
+        lang="zh-CN"
+        xmlns:ng="http://angularjs.org/">
+<![endif]-->
+<!--[if IE 7]>
+<html
+        class="no-js ie7 oldie"
+        lang="zh-CN"
+        xmlns:ng="http://angularjs.org/">
+<![endif]-->
+<!--[if IE 8]>
+<html
+        class="no-js ie8 oldie"
+        lang="zh-CN"
+        xmlns:ng="http://angularjs.org/">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"
+      lang="zh-CN"
+      xmlns:ng="http://angularjs.org/">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="blank" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>兆泰源考勤系统</title>
+    <link rel="stylesheet" href="./css/bootstrap-responsive.css" />
+    <link rel="stylesheet" href="./css/jquery.gritter.css" />
+    <link rel="stylesheet" href="./css/font-awesome.css" />
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/login.css" />
+    <!--[if ie]><link rel="stylesheet" type="text/css" href="./css/login-index-ie.css"  media="all" /><![endif]-->
+    <link rel="shortcut icon" href="./favicon.png" />
+    <!--[if lt IE 9]>
+    <script src="./lib/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body data-ng-app data-ng-controller="loginCtrl">
+<noscript>
+    <div class="container">
+        <div class="hero-unit" style="margin-top: 15px;">
+            <h1>Hello, My Hero!</h1>
+            <p>Your web browser must have JavaScript enabled in order for this application to display correctly.</p>
+            <p><a href="http://www.google.cn/intl/zh-CN/chrome/" class="btn btn-primary btn-large">安装 Chrome &raquo;</a></p>
+        </div>
+    </div>
+</noscript>
+
+<header>
+    <div class="head">
+        <div class="wrapper">
+            <div class="logo"><img class="logo" src="img/login_logo.png"></div>
+        </div>
+    </div>
+</header>
+
+<div id="myCarousel" class="carousel slide">
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="background1">
+                <div class="slider1">
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="background2">
+                <div class="slider2">
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="background3">
+                <div class="slider3">
+                </div>
+            </div>
+        </div>
+    </div>
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+</div>
+<!--<div class="banner_area" data-ng-cloak>
+    <div class="main_cont">
+        <div class="wrapper" >
+            <div class="title"><div class="title_info"><img class="img-lock" style="position: relative;top: -4px" src="img/login_lock.png"> 考勤系统</div></div>
+            <dl class="xl_info clearfix">
+                <form name="loginForm" novalidate data-ng-submit="login()" >
+                    <dd><span class="icon"><img src="img/login_user.png"></span><input name="account" id="account" data-ng-model="user.account" type="text" placeholder="用户名" required autofocus /></dd>
+                    <dd><span class="icon"><img src="img/login_password.png"></span><input name="psw" data-ng-model="user.psw" type="password" placeholder="密码" required data-ng-minlength="6" /></dd>
+                    <dd><hr></dd>
+                    <dd>
+                        <button type="submit" class="login-btn" data-ng-disabled="loginForm.$invalid || isLoading">
+                            <span data-ng-show="isLoading"><img src="./img/loading-login.gif" alt="loading"/></span>
+                            <span data-ng-hide="isLoading">登录</span>
+                        </button>
+                    </dd>
+                    <div data-ng-show="loginForm.account.$dirty && loginForm.account.$invalid">
+                        <span data-ng-show="loginForm.account.$error.required" class="help-inline"><i class="icon-warning-sign"></i> 帐号不能为空哟~</span>
+                    </div>
+                    <div data-ng-show="loginForm.psw.$dirty && loginForm.psw.$invalid">
+                        <span data-ng-show="loginForm.psw.$error.required" class="help-inline"><i class="icon-warning-sign"></i> 密码不能为空哟~</span>
+                        <span data-ng-show="loginForm.psw.$error.minlength" class="help-inline"><i class="icon-warning-sign"></i> 密码不能少于六位哟~</span>
+                    </div>
+                </form>
+            </dl>
+        </div>
+        <div class="bg"></div>
+    </div>
+</div>-->
+<div class="banner_area" data-ng-cloak>
+    <div class="main_cont">
+        <ng-include src="'loginPanel.html'" ></ng-include>
+    </div>
+</div>
+<footer>
+    <div class="foot">
+        <div class="line"><img src="img/login_line.png"></div>
+        <div style="text-align: center;margin-top: 20px;margin-bottom: 20px">
+        Copyright ©2011-2014 版权信息：MegaDataSource Information Technology Co., Ltd.
+        <br>
+        北京兆泰源信息技术有限公司 版权所有 京ICP备11040419号
+        </div>
+    </div>
+</footer>
+
+<script src="./lib/jquery/jquery.js" charset="utf-8"></script>
+<script src="./lib/bootstrap.js" charset="utf-8"></script>
+<script src="./lib/jquery/jquery.gritter.min.js" charset="utf-8"></script>
+<script src="./lib/angularJS/angular.js" charset="utf-8"></script>
+<script type="text/javascript">
+    function define(fn){
+        fn();
+    }
+</script>
+<script src="config.js"></script>
+<script type="text/javascript">
+    function loginCtrl($scope, $http, $window,$rootScope){
+
+        //$scope.failed = 0;  //记录失败次数, 失败一次以上就要求输入验证码, 为了刷新丢失问题, 需要把该值持久化到本地，并记录时间戳
+        $scope.isLoading = false;
+        $scope.user = {};
+        $scope.user.account = window.localStorageAccount || '';
+
+         function objConvertStr(o){
+            if (o == undefined) {
+                return "null";
+            }
+            var r = [];
+            if (typeof o == "string") return "\"" + o.replace(/([\"\\])/g, "\\$1").replace(/(\n)/g, "\\n").replace(/(\r)/g, "\\r").replace(/(\t)/g, "\\t") + "\"";
+            if (typeof o == "object") {
+                if (!o.sort) {
+                    for (var i in o)
+                        r.push("" + i + ":" + objConvertStr(o[i]));
+                    if (!!document.all && !/^\n?function\s*toString\(\)\s*\{\n?\s*\[native code\]\n?\s*\}\n?\s*$/.test(o.toString)) {
+                        r.push("toString:" + o.toString.toString());
+                    }
+                    r = "{" + r.join() + "}"
+                } else {
+                    for (var i = 0; i < o.length; i++)
+                        r.push(objConvertStr(o[i]))
+                    r = "[" + r.join() + "]";
+                }
+                return r;
+            }
+            return o.toString().replace(/\"\:/g, '":""');
+        }
+        jQuery("input[name='account']").focus();
+        $scope.title="考勤系统"
+        $scope.login = function(){
+            $scope.isLoading = true;
+
+            $http({
+                method: 'POST'
+                , url: config.domain + 'login'
+                , data: $scope.user
+            }).success(function(response){
+                $scope.isLoading = false;
+window.localStorage.authViewList = '{root:[1,2,3,4,5,6],authDir:[1001,1002,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,3001,3002,3003,3004,3005,3006,4001,4002,4003,4004,4005,4006,4007,5001,5002,5003,6001,6002,6003],authField:[5001002,5001001,5002002,5002001,5001003,6003001,6003002,6002001,4007001,4007002,4007003]}'//response.item.authViewList;
+                    
+                if(response.status != false){
+                    //持久化token
+                    window.localStorage.employeeId =response.item.employeeId;
+                    window.localStorage.positionId = response.item.positionId;
+                    window.localStorage.code = response.item.code;
+                    window.localStorage.employeeName = response.item.employeeName;
+                    window.localStorage.deptId = response.item.deptId;
+                    window.localStorage.deptName = response.item.deptName;
+                    window.localStorage.positionName = response.item.positionName;
+                    if(!response.item.authViewList){
+                        $scope.user.password = null;
+                        //失败提醒
+                        jQuery.gritter.add({
+                            title: '提示'
+                            , text: '没有权限'//'用户名或密码有误，登录失败'
+                            , class_name: 'loser'
+                            , image: 'img/configuration2.png'
+                            , sticky: false
+                        });
+                        return;
+                    }
+                    /* window.localStorage.authViewList = objConvertStr(response.item.authViewList);*/
+                    window.localStorage.authViewList = '{root:[1,2,3,4,5,6],authDir:[1001,1002,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,3001,3002,3003,3004,3005,3006,4001,4002,4003,4004,4005,4006,4007,5001,5002,5003,6001,6002,6003],authField:[5001002,5001001,5002002,5002001,5001003,6003001,6003002,6002001,4007001,4007002,4007003]}'//response.item.authViewList;
+                    //跳转到仪表盘
+                    $window.location.href = window.config.host;
+                }else{
+                    $scope.user.password = null;
+
+                    //失败提醒
+                    jQuery.gritter.add({
+                        title: '提示'
+                        , text: response.message//'用户名或密码有误，登录失败'
+                        , class_name: 'loser'
+                        , image: 'img/configuration2.png'
+                        , sticky: false
+                    });
+                }
+            }).error(function(response,status){
+                if(response)
+                jQuery.gritter.add({
+                    title: '提示'
+                    , text: response.message//'用户名或密码有误，登录失败'
+                    , class_name: 'loser'
+                    , image: 'img/configuration2.png'
+                    , sticky: false
+                });
+            });
+        };
+
+        (function (){
+            var w = window.screen.width-17;
+            $(".carousel-inner").css("width",w);
+            $(".carousel-inner").css("min-width","960px");
+            $(".slider1").css("width",w);
+            $(".slider1").css("min-width","960px");
+            $(".slider2").css("width",w);
+            $(".slider2").css("min-width","960px");
+
+            var w2 = (window.screen.width-960)/2+600;
+            $(".main_cont").css("left", w2);
+
+
+            $('.carousel-indicators').css("left" , window.screen.width / 2 - 30);
+            $('.carousel').carousel();
+
+            if(!navigator.userAgent.toLowerCase().match(/chrome\/([\d.]+)/)){
+                //chrome提醒
+                jQuery.gritter.add({
+                    title: '提示'
+                    , text: '推荐使用Chrome浏览器'
+                    , class_name: 'winner'
+                    , image: 'img/chrome.png'
+                    , sticky: false
+                    , before_close: function(e, manual_close){
+                        $window.location.href = 'http://www.google.cn/intl/zh-CN/chrome/browser/';
+                    }
+                });
+            }
+        })();
+    }
+</script>
+<!--[if lt IE 7 ]>
+<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+<![endif]-->
+</body>
+</html>

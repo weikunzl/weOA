@@ -1,0 +1,21 @@
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                    <h5>迟到早退列表</h5>
+                </div>
+                <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                        <li ng-show="attendanceTimeListOwn"  ng-class="{active:attendanceTimeListOwn}"  ng-click="reload('own')"><a data-toggle="tab" href="#attendanceTimeOwn">个人迟到早退信息</a></li>
+                        <li ng-show="attendanceTimeList"  ng-class="{active:attendanceTimeList&&!attendanceTimeListOwn}"  ng-click="reload('employeeList')"><a data-toggle="tab" href="#attendanceTimeEmployee" >下属迟到早退信息</a></li>
+                    </ul>
+                </div>
+                <div class="widget-content tab-content" >
+                    <ng-include src="'modules/leave/templates/attendanceTimeListOwnPanel.html'" id="attendanceTimeOwn" class="tab-pane"ng-show="attendanceTimeListOwn" ng-class="{active:attendanceTimeListOwn}"></ng-include>
+                    <ng-include src="'modules/leave/templates/attendanceTimeListPanel.html'" id="attendanceTimeEmployee" class="tab-pane" ng-show="attendanceTimeList" ng-class="{active:attendanceTimeList&&!attendanceTimeListOwn}"></ng-include>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

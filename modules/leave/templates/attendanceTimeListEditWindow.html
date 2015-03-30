@@ -1,0 +1,98 @@
+<div class="banner_area" style="margin: 0 18%;background: #ffffff">
+    <div class="attendanceTimeListEdit" ><!-- style文件在ownStyle.css里 -->
+        <div class="modal-header">
+            <button type="button" style="margin:5px 10px 0 0;" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">【{{selectedInfoItem.employeeName}}】{{selectedInfoItem.time|date :'MM'}}月份出勤信息</h4>
+
+        </div>
+        <div class="widget-content nopadding" ng-controller="attendanceTimeListEdit">
+            <div class="dataTables_wrapper">
+                <!--<div>
+                    <div class="dataTables_length form-horizontal"  style="width: 100%;">
+                        <div style="width: 96%;margin: 5px;">
+                            <span style="float: left;margin: 3px 10px">从</span><input  type="date" ng-model="searchData.beginTime" style="width: 150px;float: left"/>
+                            <span style="float: left;margin: 3px 10px">到</span><input  type="date" ng-model="searchData.endTime" style="width: 150px;float: left"/>
+                            &lt;!&ndash;<input   type="text" name="searchname" ng-model="searchData.employeeText" placeholder="员工姓名、简拼、工号" style="width: 150px;float: left;margin: 0 10px;" ng-keydown="enterSeacrh()" />&ndash;&gt;
+                            <button style="margin-left: 10px" type="button" class="btn btn-success" data-ng-click="loadGridData()">
+                                <span class="text">查询</span>
+                            </button>
+                            <div style="float:right;display: inline-block;margin-right: 0;">
+                                <button style="margin-left: 10px" type="button" class="btn btn-primary" data-ng-disabled="addDisable" data-ng-click="addAttendanceTimeListOwn()">
+                                    <span class="text">新增</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>-->
+
+                <table class="table table-bordered" style="border-bottom: 1px solid #cccccc;border-top: 1px solid #cccccc;" data-kz-table-fixed-header>
+                    <thead>
+                    <tr>
+                        <th ng-repeat="columnItem in columnsModel" ng-if="columnItem.visible!=false">
+                            {{columnItem.displayName}}
+                        </th>
+                        <th ng-if="isGM()">
+                            操作
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="attendanceTimeOwnItem in attendanceTimeOwnData" >
+                        <td class="center">
+                            <input ng-if="attendanceTimeOwnItem.$editing" class="form-control"   type="datetime-local" ng-change="attendanceTimeDuration(attendanceTimeOwnItem)" ng-model="attendanceTimeOwnItem['attendanceTimeDateTime']"/>
+                            <span ng-if="!attendanceTimeOwnItem.$editing">{{attendanceTimeOwnItem['attendanceTimeDateTime'] | date:'yyyy年MM月dd日 hh:mm'}}</span>
+                        </td>
+                        <td class="center">
+                            <span >{{ attendanceTimeOwnItem['employeeName'] }}</span>
+                        </td>
+                        <td class="center">
+                            <span >{{ getAMorPM(attendanceTimeOwnItem['attendanceTimeDateTime']) }}</span>
+                        </td>
+                        <td class="center">
+                            <span ng-if="!attendanceTimeOwnItem.$editing">{{ attendanceTimeOwnItem['attendanceTimeTypeId']==1?'迟到':'早退' }}</span>
+                            <select  ng-if="attendanceTimeOwnItem.$editing" style="width: 100px" data-ng-model="attendanceTimeOwnItem['attendanceTimeTypeId']" ng-change="attendanceTimeDuration(attendanceTimeOwnItem)">
+                                <option value="1">迟到</option>
+                                <option value="2">早退</option>
+                            </select>
+                        </td>
+                        <td class="center">
+                            <span >{{ formatAttendanceTimeDuration(attendanceTimeOwnItem['attendanceTimeDuration']) }}</span>
+                        </td>
+                        <td class="center">
+                            <span ng-if="!attendanceTimeOwnItem.$editing">{{ attendanceTimeOwnItem['comments'] }}</span>
+                            <textarea ng-if="attendanceTimeOwnItem.$editing" data-ng-model="attendanceTimeOwnItem['comments']" style="width: 90%;height: 25px;resize:both"></textarea>
+                        </td>
+                        <td class="center" style="width: 18%" ng-if="isGM()">
+                            <div  class="text-center" style="padding: 3px;">
+                    <span ng-if="!attendanceTimeOwnItem.$editing" class="btn-info btn-small center" ng-click="editAttendanceTimeListOwn(attendanceTimeOwnItem)" >
+                    <a style="color: #ffffff" ><i class="icon-edit"></i> 修改</a></span>
+                    <span ng-if="attendanceTimeOwnItem.$editing" class="btn-success btn-small center" ng-click="saveAttendanceTimeListOwn(attendanceTimeOwnItem)" >
+                    <a style="color: #ffffff" ><i class="icon-save"></i> 保存</a></span>
+                     <span class="btn-danger btn-small center" data-trigger="click" data-unique="1">
+                    <a ng-click="deleteAttendanceTimeListOwn(attendanceTimeOwnItem)" style="color: #ffffff"><i class="icon-remove"></i> 删除</a></span>
+                            </div>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="ui-toolbar ui-widget-header">
+                    <div class="dataTables_paginate">
+
+                        <small class="text-error" style="float: left;font-weight: 600;font-size: 16px">{{errorTip}}</small>
+                        <button class="btn" data-ng-click="loadGridData(true)" data-ng-disabled="!hasManyData" data-ng-hide="isLoading">
+                                        <span data-ng-switch on="hasManyData">
+                                            <span data-ng-switch-when="true"><i class="icon-download-alt"></i> 更多</span>
+                                            <span data-ng-switch-when="false"><i class="icon-twitter"></i> 暂无</span>
+                                        </span>
+                        </button>
+                        <img data-ng-show="isLoading" src="./img/loading.gif" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

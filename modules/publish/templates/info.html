@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-envelope"></i> </span>
+                    <h5>消息详细</h5>
+                </div>
+
+                <div class="widget-content">
+                    <div class="chat-content" data-ng-if="!isLoading">
+                        <div class="chat-messages">
+                            <div id="chat-messages-inner">
+                                <p class="user-linda">
+                                    <span class="msg-block">
+                                        <strong>{{msgInfo.title}}</strong>
+                                        <span class="time"><span class="label">来源：{{msgInfo.who.name}}  <span >【<span am-time-ago="msgInfo.time"></span>】</span></span></span>
+                                        <span class="msg" data-ng-bind-html="msgInfo.message"></span>
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div data-ng-if="msgType" class="well" style="margin-top: 5px;">
+                                <form name="messageForm" novalidate>
+                                    <div class="control-group" data-ng-class="{error: messageForm.title.$dirty && messageForm.title.$invalid}">
+                                        <label class="control-label">标题</label>
+                                        <div class="controls">
+                                            <input type="text" class="span11" name="title" data-ng-model="replyForm.title" autocomplete="false" required />
+                                            <div data-ng-show="messageForm.title.$dirty && messageForm.title.$invalid">
+                                                <span data-ng-show="messageForm.title.$error.required" class="help-inline"><i class="icon-warning-sign"></i> 标题是必填项哟~</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group" data-ng-class="{error: messageForm.message.$dirty && messageForm.message.$invalid}">
+                                        <label class="control-label">内容</label>
+                                        <div class="controls">
+                                            <textarea class="span11" name="message" data-ng-model="replyForm.message" required></textarea>
+                                            <div data-ng-show="messageForm.message.$dirty && messageForm.message.$invalid">
+                                                <span data-ng-show="messageForm.message.$error.required" class="help-inline"><i class="icon-warning-sign"></i> 内容是必填项哟~</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions">
+                                        <button class="btn btn-success" data-ng-click="reply()" data-ng-disabled="messageForm.$invalid">回复</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 5px;">
+                            <button class="btn btn-mini btn-info" type="button" data-ng-click="history()">历史消息</button>
+                            <button class="btn btn-mini btn-danger" type="button" data-ng-click="deleteMsg()">删除</button>
+                        </div>
+                    </div>
+                    <img data-ng-if="isLoading" src="./img/loading.gif" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

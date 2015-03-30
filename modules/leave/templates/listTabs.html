@@ -1,0 +1,23 @@
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                    <h5>请假列表</h5>
+                </div>
+                <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                        <li ng-show="listOwn" ng-class="{active:listOwn&&(seeSelf==1||!list)}" ng-click="reload('own')"><a data-toggle="tab" href="#leaveOwn">个人查询</a></li>
+                        <li ng-show="list" ng-class="{active:list&&seeSelf!=1}" ng-click="reload()"><a data-toggle="tab" href="#leaveEmployeePass">请假审批</a></li>
+                        <li ng-show="listEmp" ng-class="{active:listEmp&&!list&&!listOwn}" ng-click="reload('employeeList')"><a data-toggle="tab" href="#leaveEmployee" >下属查询</a></li>
+                    </ul>
+                </div>
+                <div class="widget-content tab-content" >
+                    <ng-include src="'modules/leave/templates/listOwn.html'" id="leaveOwn" class="tab-pane" ng-show="listOwn" ng-class="{active:listOwn&&(seeSelf==1||!list)}"></ng-include>
+                    <ng-include src="'modules/leave/templates/list.html'" id="leaveEmployeePass" class="tab-pane"  ng-show="list" ng-class="{active:list&&seeSelf!=1}"></ng-include>
+                    <ng-include src="'modules/leave/templates/listEmp.html'" id="leaveEmployee" class="tab-pane" ng-show="listEmp" ng-class="{active:listEmp&&!list&&!listOwn}"></ng-include>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

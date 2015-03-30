@@ -1,0 +1,90 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html
+        class="no-js ie6 oldie"
+        lang="zh-CN"
+        xmlns:ng="http://angularjs.org/">
+<![endif]-->
+<!--[if IE 7]>
+<html
+        class="no-js ie7 oldie"
+        lang="zh-CN"
+        xmlns:ng="http://angularjs.org/">
+<![endif]-->
+<!--[if IE 8]>
+<html
+        class="no-js ie8 oldie"
+        lang="zh-CN"
+        xmlns:ng="http://angularjs.org/">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"
+      lang="zh-CN"
+      xmlns:ng="http://angularjs.org/">
+<!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="blank" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>web OS</title>
+
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/bootstrap-responsive.css" />
+    <link rel="stylesheet" href="./css/matrix-style.css" />
+    <link rel="stylesheet" href="./css/matrix-media.css" />
+    <link rel="stylesheet" href="./css/font-awesome.css" />
+    <link rel="shortcut icon" href="./favicon.png" />
+    <!--
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' />
+    -->
+    <!--[if lt IE 9]>
+    <script src="./lib/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body data-ng-app data-ng-controller="loginCtrl">
+<noscript>
+    <div class="container">
+        <div class="hero-unit" style="margin-top: 15px;">
+            <h1>Hello, My Hero!</h1>
+            <p>Your web browser must have JavaScript enabled in order for this application to display correctly.</p>
+            <p><a href="http://www.google.cn/intl/zh-CN/chrome/" class="btn btn-primary btn-large">安装 Chrome &raquo;</a></p>
+        </div>
+    </div>
+</noscript>
+
+<!--Footer-part-->
+<div class="row-fluid">
+    <div id="footer" class="span12">
+        Copyright &copy;2011-2013 Zhaotaiyuan Co,.Ltd Allrights Reserved.<br>
+        北京兆泰源信息技术有限公司 &copy; 版权所有 京ICP备11040419号
+    </div>
+</div>
+
+<script src="./lib/angularJS/angular.js" charset="utf-8"></script>
+<script type="text/javascript">
+    function define(fn){
+        fn();
+    }
+</script>
+<script src="config.js"></script>
+<script type="text/javascript">
+  /*  function loginCtrl($scope, $http, $window, $location){
+        $scope.error = false;
+        $scope.isLoading = true;
+        $scope.token = $location.search()['token'];
+
+		window.localStorage.token = $scope.token;
+
+		//跳转到仪表盘页面
+		$window.location.href = config.host;
+    }*/
+</script>
+<!--[if lt IE 7 ]>
+<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+<![endif]-->
+</body>
+</html>

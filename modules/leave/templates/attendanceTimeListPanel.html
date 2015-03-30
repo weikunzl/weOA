@@ -1,0 +1,73 @@
+<div class="widget-content nopadding" ng-controller="attendanceTimeList">
+    <div class="dataTables_wrapper">
+        <div>
+            <div class="dataTables_length form-horizontal"  style="width: 100%;">
+                <label style="width: 96%;">
+                    <span style="float: left;margin: 3px 10px">从</span><input  type="date" ng-model="searchData.beginTime" style="width: 150px;float: left"/>
+                    <span style="float: left;margin: 3px 10px">到</span><input  type="date" ng-model="searchData.endTime" style="width: 150px;float: left"/>
+                    <input   type="text" name="searchname" ng-model="searchData.employeeText" placeholder="员工姓名、简拼、工号" style="width: 150px;float: left;margin: 0 10px;" ng-keydown="enterSeacrh()" />
+                    <button style="margin-left: 10px" type="button" class="btn btn-success" data-ng-click="loadGridData()">
+                        <span class="text">查询</span>
+                    </button>
+                   <!-- <div style="float:right;display: inline-block;margin-right: 0;">
+                        <button style="margin-left: 10px" type="button" class="btn btn-primary" data-ng-disabled="!selectedInfo" data-ng-click="showUpdateEmployeeDept()">
+                            <span class="text">新增</span>
+                        </button>
+                    </div>-->
+                </label>
+
+            </div>
+        </div>
+        <table class="table table-bordered" style="border-bottom: 1px solid #cccccc;border-top: 1px solid #cccccc;" data-kz-table-fixed-header>
+            <thead>
+            <tr>
+                <th ng-repeat="columnItem in columnsModel" ng-if="columnItem.visible!=false">
+                    {{columnItem.displayName}}
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="attendanceTimeOwnItem in attendanceTimeOwnData">
+                <td class="center">
+                    <input ng-if="attendanceTimeOwnItem.$editing" class="form-control"   type="datetime-local" ng-model="attendanceTimeOwnItem['attendanceTimeDateTime']"/>
+                    <span ng-if="!attendanceTimeOwnItem.$editing">{{attendanceTimeOwnItem['attendanceTimeDateTime'] | date:'yyyy年MM月dd日 hh:mm'}}</span>
+                </td>
+                <td class="center">
+                    <span >{{ attendanceTimeOwnItem['employeeName'] }}</span>
+                </td>
+                <td class="center">
+                    <span >{{ attendanceTimeOwnItem['deptName'] }}</span>
+                </td>
+                <td class="center">
+                    <span >{{ getAMorPM(attendanceTimeOwnItem['attendanceTimeDateTime']) }}</span>
+                </td>
+                <td class="center">
+                    <span ng-if="!attendanceTimeOwnItem.$editing">{{ attendanceTimeOwnItem['attendanceTimeTypeId']==1?'迟到':'早退' }}</span>
+                    <select  ng-if="attendanceTimeOwnItem.$editing" style="width: 100px" data-ng-model="attendanceTimeOwnItem['attendanceTimeTypeId']" >
+                        <option value="1">迟到</option>
+                        <option value="2">早退</option>
+                    </select>
+                </td>
+                <td class="center">
+                    <span >{{ formatAttendanceTimeDuration(attendanceTimeOwnItem['attendanceTimeDuration']) }}</span>
+                </td>
+                <td class="center">
+                    <span ng-if="!attendanceTimeOwnItem.$editing">{{ attendanceTimeOwnItem['comments'] }}</span>
+                    <textarea ng-if="attendanceTimeOwnItem.$editing" data-ng-model="attendanceTimeOwnItem['comments']" style="width: 90%;height: 25px;resize:both"></textarea>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="ui-toolbar ui-widget-header">
+            <div class="dataTables_paginate">
+                <button class="btn" data-ng-click="loadGridData(true)" data-ng-disabled="!hasManyData" data-ng-hide="isLoading">
+                                        <span data-ng-switch on="hasManyData">
+                                            <span data-ng-switch-when="true"><i class="icon-download-alt"></i> 更多</span>
+                                            <span data-ng-switch-when="false"><i class="icon-twitter"></i> 暂无</span>
+                                        </span>
+                </button>
+                <img data-ng-show="isLoading" src="./img/loading.gif" />
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="container-fluid">
+
+        <div class="span12">
+            <div class="widget-box">
+
+                <div class="widget-title"> <span class="icon"> <i class="icon-reorder"></i> </span>
+                    <h5>加班设置</h5>
+                </div>
+
+                <div class="nopadding">
+                    <div class="row-fluid">
+                        <form action="#" method="get" class="form-horizontal">
+                    <div class="widget-content">
+                        <div class="control-group">
+                            <label class="control-label" for="salaryInputPasswordOld">原始密码</label>
+                            <div class="controls">
+
+                            <input type="password" class="form-control" ng-model="salaryInputPasswordOld" id="salaryInputPasswordOld" placeholder="原始输入密码" required>
+                                </div>
+                        </div>
+                        <hr/>
+                        <div class="control-group" novalidate>
+                            <label class="control-label" for="salaryInputPassword1">设置薪资密码</label>
+                            <div class="controls">
+                                <input type="password" class="form-control" ng-model="salaryInputPassword1" id="salaryInputPassword1"  data-ng-minlength="8" placeholder="新输入密码" required >
+                            </div>
+                            <label  class="control-label" for="salaryInputPassword2">重复薪资密码</label>
+                            <div class="controls">
+
+                                <input type="password" class="form-control" ng-model="salaryInputPassword2" id="salaryInputPassword2" placeholder="重复输入密码" required>
+                                <p ng-show="(salaryInputPassword1+'').length>=8&&salaryInputPassword2&&salaryInputPassword1!=salaryInputPassword2" class="help-block">两次输入的密码不一致</p>
+                            <p ng-if="(salaryInputPassword1+'').length<8" class="help-block">密码必须超过八位.</p>
+
+                            </div>
+                        </div>
+                        <div class="controls">
+                        <button class="btn btn-default" ng-click="setPassword()" data-ng-disabled="(!salaryInputPassword2&&!salaryInputPassword1)||(salaryInputPassword1+'').length<8||(salaryInputPassword1+'').length<8||salaryInputPassword1!=salaryInputPassword2">提交</button>
+                            </div>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+</div>
+

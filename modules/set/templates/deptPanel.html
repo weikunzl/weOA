@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box " style="position: absolute;left: 2%;;width: 15%">
+                <div class="widget-title bg_ly" data-toggle="collapse" href="#collapseG2"><span class="icon"><i class="icon-chevron-down"></i></span>
+                    <h5>部门</h5>
+                </div>
+                <div class="widget-content nopadding in collapse" id="collapseG2">
+                    <div class="deptTreePanel_toolbar" ng-show="positionId==config.systemArguments.adminRole">
+                        <button class="btn btn-success btn-mini" ng-click="createNode()">新增</button>
+                        <button class="btn btn-warning btn-mini" ng-click="renameNode()">修改</button>
+                        <button class="btn btn-danger btn-mini" ng-click="deleteNode()">删除</button>
+<!--
+                        <button class="btn btn-primary btn-mini" ng-click="saveTreeData()">保存</button>
+-->
+                    </div>
+                    <div id="deptTreeShow"></div>
+                </div>
+
+            </div>
+            <div class="widget-box" style="position: absolute;right:2%;width: 80%">
+                <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                    <h5>员工列表</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <div class="dataTables_wrapper">
+                        <div>
+                            <div class="dataTables_length form-horizontal"  style="width: 100%;">
+                                <div style="width: 96%;">
+                                    <span style="float: left;margin: 3px 5px;">从</span><input  type="date" name="timeFrom" ng-model="timeFrom" style="width: 13%;float: left"/>
+                                    <span style="float: left;margin: 3px 5px;">到</span><input  type="date" name="timeTo" ng-model="timeTo" style="width: 13%;float: left"/>
+                                    <input   type="text" name="searchname" ng-model="employeeText" placeholder="员工姓名、简拼、工号" style="width: 12%;float: left;margin: 0 7px;" ng-keydown="enterSeacrh()" />
+                                    <button style="margin-left: 10px" type="button" class="btn btn-success" data-ng-click="loadGridData()">
+                                        <span class="text">查询</span>
+                                    </button>
+                                    <div style="float:right;display: inline-block;margin-right: 0;">
+                                        <button style="margin-left: 10px;width: 135px;" type="button" class="btn btn-primary" ng-show="authFlag.positionAuthFlag" data-ng-click="showUpdatePositionAuth()">
+                                            <span class="text">职务权限绑定</span>
+                                        </button>
+                                       <!-- <button style="margin-left: 10px;width: 85px;" type="button" class="btn btn-primary" data-ng-disabled="!selectedInfo" data-ng-click="showUpdateEmployeeAuth()">
+                                            <span class="text">权限分配</span>
+                                        </button>-->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <style>
+                            .gridStyle {
+                                border: 1px solid rgb(212, 212, 212);
+                                min-height: 420px;
+                                height: 100%
+                            }
+                        </style>
+                        <div class="gridStyle" ng-grid="gridOptions" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

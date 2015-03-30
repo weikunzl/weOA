@@ -1,0 +1,30 @@
+<div style="overflow:auto; max-height:600px;">
+    <button type="button" style="margin:5px 10px 0 0;" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <table class="table table-hover table-bordered table-condensed" ng-show="opener.updateDataList&&opener.updateDataList.length>0">
+        <caption><h4>{{"【"+opener.entity.employeeName+"】修改记录"}}</h4><small style="font-size: 5px;float: right;margin-right: 20px;">(单位：小时)</small></caption>
+        <thead>
+        <tr>
+            <th >操作时间</th>
+            <th >操作人</span> </th>
+            <th ng-repeat="salaryType in salaryTypes"><span ng-bind="salaryType.salaryTypeName"></span> </th>
+            <th >备注</span> </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="salaryEmployeeDetail in opener.updateDataList">
+            <td class="center span1"><span ng-bind="salaryEmployeeDetail.modifyDate" /></td>
+            <td class="center span1"><span ng-bind="salaryEmployeeDetail.modifyUser" /></td>
+            <td class="center span1" ng-repeat="salaryType in salaryTypes">
+                <span ng-bind="getDetailListNode(salaryType,salaryEmployeeDetail)"></span>
+            </td>
+            <td class="center span1"><span ng-bind="salaryEmployeeDetail.remark" /></td>
+        </tr>
+       <!-- <tr >
+            <td class="center span1" ng-repeat="doingType_temp in doingTypes">
+                <span ng-bind="doingType_temp.id?(totalData['doingType'+doingType_temp.id]?totalData['doingType'+doingType_temp.id]:'-'):totalData.day"></span>
+            </td>
+        </tr>-->
+        </tbody>
+    </table>
+    <h3 ng-show="!opener.updateDataList||opener.updateDataList.length<1" style="text-align: center;margin: 60px;">{{"没有的【"+opener.entity.employeeName+"】调薪信息"}}</h3>
+</div>

@@ -1,0 +1,87 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+
+                <div class="widget-content nopadding">
+                    <div class="dataTables_wrapper">
+
+                        <table class="table table-bordered" style="border-bottom: 1px solid #cccccc;border-top: 1px solid #cccccc;" data-kz-table-fixed-header>
+                            <thead>
+                            <tr>
+                                <th class="span6">
+                                    请假类型
+                                </th>
+                                <th class="span9">
+                                    关联工资
+                                </th>
+                                <th class="span3">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="center"><input class="span4" style="text-align: center" type="text" ng-model="formData.type"/></td>
+                                <td class="center">
+                                    <div class="btn-group">
+                                        <label ng-repeat="value in vm.values" style="float: right">
+                                            <input type="checkbox" ng-click="isClick(value.salaryTypeId,formData)"  ng-checked="formData.salaryTypeId.indexOf(value.salaryTypeId)>-1" ng-value="value.salaryTypeId"/>
+                                            <span style="position: relative;top: 3px;margin-right: 20px">{{value.salaryTypeName}}</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="center">
+
+                                <span>
+                                    <button type="button" rows="5" class="btn btn-success" data-ng-disabled="!isOK()" data-ng-click="saveData()">
+                                        <i class="icon-save"></i> <span class="text">添加</span>
+                                    </button>
+                                </span>
+
+
+                                </td>
+                            </tr>
+                            <tr data-ng-class="{'delete-line':item.isDelete}" data-ng-repeat="item in data">
+
+                                <td class="center" ng-if="!item.$editing">{{ item.type }}</td>
+                                <td class="center" ng-if="item.$editing"><input type="text" required="" class="span4" style="text-align: center" ng-model="item.type"/></td>
+
+                                <td class="center" ng-if="!item.$editing" ><span ng-repeat="salaryName in item.salaryTypeName" style="margin-left: 20px">{{ salaryName }}</span></td>
+                                <td class="center" ng-if="item.$editing">
+                                    <div class="btn-group">
+                                        <label ng-repeat="value in vm.values" style="float: right">
+                                            <input type="checkbox" ng-click="isClick(value.salaryTypeId,item)" ng-checked="item.salaryTypeId.toString().indexOf(value.salaryTypeId)>-1" ng-value="value.salaryTypeId"/>
+                                            <span style="position: relative;top: 3px;margin-right: 20px">{{value.salaryTypeName}}</span>
+                                        </label>
+                                    </div>
+                                </td>
+
+                                <td class="center">
+
+                                    <button class="btn btn-info" ng-if="!item.$editing" ng-click="item.$editing = true">
+                                        <a href="" style="color: #ffffff"><i class="icon-edit"></i> 编辑</a>
+                                    </button>
+                                    <button class="btn btn-info" ng-if="item.$editing"  data-ng-click="saveEditData(item)" data-ng-disabled="item.salaryTypeId==null">
+                                        <a href="" style="color: #ffffff"><i class="icon-edit"></i> 保存</a>
+                                    </button>
+
+                                    <button class="btn btn-danger" data-trigger="click" data-unique="1" data-placement="left" data-title="提示" data-bs-popover="'deleteItem.html'">
+                                        <a href="" style="color: #ffffff"><i class="icon-remove"></i> 删除</a>
+                                    </button>
+
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="ui-toolbar ui-widget-header">
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

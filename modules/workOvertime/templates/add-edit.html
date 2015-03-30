@@ -1,0 +1,74 @@
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-reorder"></i> </span>
+                    <h5>加班条</h5>
+                </div>
+                <form name="dataForm" novalidate class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">加班时长<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                        <div class="controls">
+                            <input  data-ng-disabled="true"  class="span1" name="duration" data-ng-model="formData.duration" required
+                                   onkeyup="value=value.replace(/[^\d.]/g,'')" value=""
+                                   onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">小时 &nbsp <span style="color: red">{{tip}}</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="col-sm-6 control-label">开始时间<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                        <div class="controls">
+                            <input ng-blur="getDuration()" class="span3" name="beginTime" type="datetime-local" data-ng-model="formData.beginTime"  required /> 小时  {{ hourtip}}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">结束时间<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                        <div class="controls">
+                            <input ng-blur="getDuration()"  class="span3" name="endTime" type="datetime-local" data-ng-model="formData.endTime"  required /> 小时 {{ hourtip}}
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">补充说明<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                        <div class="controls">
+                            <textarea class="span3" name="reason" type="text" data-ng-model="formData.reason"  required ></textarea>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">加班类型<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                        <div class="controls">
+                            <div class="radio" style="height:30px">
+                                <label >
+                                    <input type="radio" checked ng-model="formData.isSalary" value="1" name="salaryType" ng-click="formData.dinner=1" />
+                                    日常加班
+                                <label  class="checkbox-inline" for="newWorkOverDinner" style="display: inline;margin: 0 0 0 90px ;">
+                                    <input data-ng-disabled="formData.isSalary!=1" ng-checked="formData.dinner==1" class="span1" style="min-height: 20px;width: 30px;margin: 0;"
+                                    ng-true-value="1"
+                                    ng-false-value="0" id="newWorkOverDinner" name="dinner" type="checkbox" data-ng-model="formData.dinner"/>饭补</label>
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" ng-model="formData.isSalary" value="0" name="salaryType" ng-click="formData.dinner=0"/>
+                                    节假日加班
+                                </label>
+                           <!-- <label class="checkbox-inline" for="newWorkOverSalary" style="display: inline;margin-right: 40px;">加班补贴<input class="span1" style="margin:0;min-height: 20px;" id="newWorkOverSalary" name="Salary" type="checkbox" data-ng-model="formData.isSalary"/></label>
+                            <label class="checkbox-inline input-xlarge" ng-if="!formData.isSalary" for="newWorkOverWeekend" style="display: inline;margin-right: 40px;">是否节假日<input class="span1" style="margin:0;min-height: 20px;"  id="newWorkOverWeekend" name="Weekend" type="checkbox" data-ng-model="formData.isWeekend"/></label>
+-->                         </div>
+                      </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button  style="margin-left: 60px;" type="button" rows="5" class="btn btn-success" data-ng-disabled="!isOK()" data-ng-click="saveData()">
+                            <i class="icon-save"></i> <span class="text">提交</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+
+
+

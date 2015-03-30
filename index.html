@@ -1,0 +1,355 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html
+        class="no-js ie6 oldie"
+        lang="zh-CN"
+        xmlns:ng="http://angularjs.org/">
+<![endif]-->
+<!--[if IE 7]>
+<html
+        class="no-js ie7 oldie"
+        lang="zh-CN"
+        xmlns:ng="http://angularjs.org/">
+<![endif]-->
+<!--[if IE 8]>
+<html
+        class="no-js ie8 oldie"
+        lang="zh-CN"
+        xmlns:ng="http://angularjs.org/">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"
+      lang="zh-CN"
+      xmlns:ng="http://angularjs.org/">
+<!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="blank" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>兆泰源考勤系统</title>
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/bootstrap-responsive.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/highlighter-default.min.css" />
+    <link rel="stylesheet" href="./lib/ng-grid-2.0.12/ng-grid.min.css" />
+    <link rel="stylesheet" href="./lib/jsTree/themes/default/style.min.css" />
+    <link rel="stylesheet" href="./lib/angularJS/select/select2.css" />
+    <link rel="stylesheet" href="./css/ownStyle.css" />
+    <link rel="shortcut icon" href="./favicon.png" />
+    <!--[if lt IE 9]>
+    <script src="./lib/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body data-ng-controller="menuCtrl">
+<noscript>
+    <div class="container">
+        <div class="hero-unit" style="margin-top: 15px;">
+            <h1>Hello, My Hero!</h1>
+            <p>Your web browser must have JavaScript enabled in order for this application to display correctly.</p>
+            <p><a href="http://www.google.cn/intl/zh-CN/chrome/" class="btn btn-primary btn-large">安装 Chrome &raquo;</a></p>
+        </div>
+    </div>
+</noscript>
+
+<div data-ng-cloak>
+    <!--Header-part-->
+    <div id="globalLoading" data-ng-show="globalLoading"></div>
+    <div id="header">
+        <h1><a>兆泰源考勤系统</a></h1>
+    </div>
+    <!--close-Header-part-->
+
+    <!--top-Header-menu-->
+    <div id="user-nav" class="navbar navbar-inverse" style="display: none">
+        <ul class="nav">
+            <li class="dropdown" id="menu-messages">
+                <a data-trigger="click"
+                        data-placement="bottom"
+                        data-bs-popover="'messageWin.html'"
+                        data-ng-click="getList(0, 0, 1, 5)">
+                    <i class="icon icon-envelope"></i> <span class="text">消息</span> <span class="label label-important" data-ng-if="msgTotal">{{msgTotal}}</span> <b class="caret"></b>
+                </a>
+            </li>
+            <!--<li><kz-action data-name="back" data-group="publish" data-ng-click="$parent.back()" /></li>-->
+            <!--<li><kz-action class="cursor-pointer" data-name="logout" data-group="publish" data-ng-click="$parent.modalWin()" /></li>-->
+        </ul>
+    </div>
+    <!--close-top-Header-menu-->
+
+    <!--sidebar-menu-->
+    <div id="sidebar">
+        <a class="visible-phone" data-ng-click="expansion()"><i class="icon icon-reorder"></i> 菜单</a>
+        <kz-sidebar-menu data-ng-show="$parent.openStatus > 0" data-data="menu" data-args="{page:1, type:0, status:0}"></kz-sidebar-menu>
+    </div>
+    <!--sidebar-menu-->
+
+    <!--main-container-part-->
+    <div id="content">
+        <!--breadcrumbs-->
+        <div id="content-header">
+            <kz-breadcrumbs />
+        </div>
+        <!--End-breadcrumbs-->
+
+        <div id="mainFrame" data-ng-view></div>
+    </div>
+
+    <!--end-main-container-part-->
+
+    <!--Footer-part-->
+    <div class="row-fluid">
+        <div id="footer" class="span12">
+		Copyright &copy;2011-2014 版权信息：MegaDataSource Information Technology Co., Ltd.<br>
+        beta v1.0 管理员联系方式：<a href="mailto:ayxsoft@163.com" data-target="_blank">ayxsoft@163.com</a><br>
+		北京兆泰源信息技术有限公司 &copy; 版权所有 京ICP备11040419号
+		</div>
+    </div>
+    <div style="position: absolute;right: 200px;top: 10px;text-align:right;width: 300px;height: 30px;color: #ffffff;font-size: 10pt" ng-bind="User"></div>
+    <div class="btn-info btn" style="position: absolute;right:110px;top: 6px;color: #ffffff;font-size: 10pt"  ng-click="editUserInfo()"><a style="color: #ffffff">个人信息</a></div>
+    <div class="btn-danger btn quit" style="position: absolute;right: 50px;top: 6px;color: #ffffff;font-size: 10pt"><a style="color: #ffffff" href="login.html">退出</a></div>
+    <!--end-Footer-part-->
+</div>
+
+<script type="text/ng-template" id="messageWin.html">
+    <div class="text-center" style="width: 250px;">
+        <div class="btn-group" data-ng-model="$parent.msgType" bs-buttons-radio>
+            <button class="btn btn-mini" type="button" value="0" data-ng-click="$parent.getList(0, 0, 1, 5)">系统</button>
+            <button class="btn btn-mini" type="button" value="1" data-ng-click="$parent.getList(1, 0, 1, 5)">用户</button>
+        </div>
+        <div class="todo">
+            <ul>
+                <li class="clearfix" data-ng-repeat="item in newsList" data-ng-click="$parent.newInfo(item._id, $parent.msgType);hide();">
+                    <div class="txt"><i class="icon-envelope"></i> <span style="cursor: pointer;">{{item.title | limitTo:18}}<span data-ng-if="item.title.length > 18">……</span></span></div>
+                    <div class="pull-right"><i class="icon-chevron-right"></i></div>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix" style="margin-top:15px;" data-ng-if="newsList.length">
+            <button class="pull-left btn btn-mini btn-info" type="button" data-ng-click="$parent.messageList($parent.msgType);hide();">查看更多</button>
+            <button class="pull-right btn btn-mini btn-danger" type="button" data-ng-click="$parent.ignoreAll($parent.msgType)">忽略全部</button>
+        </div>
+        <div class="clearfix" style="margin-top:15px;" data-ng-if="!newsList.length">
+            <span><i class="icon-inbox"></i> 暂无</span>
+        </div>
+    </div>
+</script>
+
+<script src="./lib/requireJS/require.js" data-main="./bootstrap.js"></script>
+<!--[if lt IE 7 ]>
+<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+<![endif]-->
+<script type="text/ng-template" id="reject.html">
+    <ul class="activity-list">
+        <li>
+            <span class="text">原因 <i class="icon-caret-right"></i></span> <textarea class="span8" data-ng-model="$parent.item.resultReason" autofocus="autofocus"></textarea>
+        </li>
+    </ul>
+    <div class="pull-right">
+        <button class="btn btn-mini btn-danger" data-ng-click="$parent.reject($parent.item);hide()"><i class="icon-remove"></i> <span class="text">驳回</span></button>
+        <span>&nbsp;</span>
+        <button class="btn btn-mini" data-ng-click="hide()"><i class="icon-share-alt"></i> <span class="text">取消</span></button>
+    </div>
+    <div class="clearfix"></div>
+</script>
+
+<script type="text/ng-template" id="pass.html">
+    <ul class="activity-list">
+        <li>
+            <span class="text">原因 <i class="icon-caret-right"></i></span> <textarea class="span8" data-ng-model="$parent.item.resultReason" autofocus="autofocus"></textarea>
+        </li>
+    </ul>
+    <div class="pull-right">
+        <button class="btn btn-mini btn-success" data-ng-click="alert(1);$parent.pass($parent.item);hide()"><i class="icon-remove"></i> <span class="text">同意</span></button>
+        <span>&nbsp;</span>
+        <button class="btn btn-mini" data-ng-click="hide()"><i class="icon-share-alt"></i> <span class="text">取消</span></button>
+    </div>
+    <div class="clearfix"></div>
+</script>
+<script type="text/ng-template" id="rejectAll.html">
+    <ul class="activity-list">
+        <li>
+            <span class="text">原因 <i class="icon-caret-right"></i></span> <textarea class="span8" data-ng-model="$parent.employeeSelection.resultReason" autofocus="autofocus"></textarea>
+        </li>
+    </ul>
+    <div class="pull-right">
+        <button class="btn btn-mini btn-danger" data-ng-click="$parent.reject($parent.employeeSelection);hide()"><i class="icon-remove"></i> <span class="text">驳回</span></button>
+        <span>&nbsp;</span>
+        <button class="btn btn-mini" data-ng-click="hide()"><i class="icon-share-alt"></i> <span class="text">取消</span></button>
+    </div>
+    <div class="clearfix"></div>
+</script>
+
+<script type="text/ng-template" id="passAll.html">
+    <ul class="activity-list">
+        <li>
+            <span class="text">原因 <i class="icon-caret-right"></i></span> <textarea class="span8" data-ng-model="$parent.employeeSelection.resultReason" autofocus="autofocus"></textarea>
+        </li>
+    </ul>
+    <div class="pull-right">
+        <button class="btn btn-mini btn-success" data-ng-click="$parent.pass($parent.employeeSelection);hide()"><i class="icon-remove"></i> <span class="text">同意</span></button>
+        <span>&nbsp;</span>
+        <button class="btn btn-mini" data-ng-click="hide()"><i class="icon-share-alt"></i> <span class="text">取消</span></button>
+    </div>
+    <div class="clearfix"></div>
+</script>
+
+<script type="text/ng-template" id="deleteItem.html">
+    <div>
+        <ul class="activity-list">
+            <li>
+                <i class="icon-bullhorn"></i> 您确定删除么？</li>
+        </ul>
+        <div class="pull-right">
+            <button class="btn btn-danger btn-mini" data-ng-click="$parent.deleteItem($parent.item);hide()">
+                <i class="icon-trash"></i><span class="text">确定</span>
+            </button>
+            <span>&nbsp;</span>
+            <button class="btn btn-mini" data-ng-click="hide()" >
+                <i class="icon-share-alt"></i><span class="text">取消</span>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="dataTrack.html">
+    <div style="overflow:auto; max-height:600px;">
+        <button type="button" style="margin:5px 10px 0 0;" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <form class="form-horizontal" style="margin-top:5px;">
+            <div class="control-group">
+                <div style="margin: 10px">
+                    <table class="table table-hover table-bordered table-condensed">
+                        <caption><h4>数据轨迹列表</h4></caption>
+                        <thead>
+                        <tr>
+                            <th>操作人</th>
+                            <th>操作</th>
+                            <th>操作时间</th>
+                            <th>说明</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="item in trackData">
+                            <td class="center span1">{{ item.operatorName }}</td>
+                            <td class="center span1">{{ item.statusId}}</td>
+                            <td class="center span2">{{ item.operateTime }}</td>
+                            <td class="center span3">{{ item.resultReason }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+<script type="text/ng-template" id="logout.html">
+    <div style="padding-top:5px">
+        <form class="form-horizontal">
+            <div class="control-group">
+                <div class="controls">
+                    <span><i class="icon-bullhorn"></i> 您确定退出系统么？</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="button" class="btn btn-danger" data-ng-click="logout();hide()"><i class="icon-off"></i> <span class="text">确定</span></button>
+                    <span>&nbsp;</span>
+                    <button type="button" class="btn" data-ng-click="hide()"><i class="icon-remove"></i> <span class="text">取消</span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/ng-template" id="navigation.html">
+    <div style="overflow:auto; max-height:600px;">
+        <button type="button" style="margin:5px 10px 0 0;" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <form class="form-horizontal" style="margin-top:5px;">
+            <div class="control-group">
+                <div style="margin: 10px">
+                    <table class="table table-hover table-bordered table-condensed">
+                        <caption><h4 style="text-align: center">加班饭补统计</h4> <h5><br>{{timeFrom}}——{{timeTo}}</h5></caption>
+                        <thead>
+                        <tr>
+                            <th>员工姓名</th>
+                            <th>饭补次数</th>
+                            <th>加班总时长</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="center span1">{{ b }}</td>
+                            <td class="center span1">{{ mydinnerCount }}</td>
+                            <td class="center span2">{{ myworkCount  }}</td>
+                        </tr>
+                        </tbody>
+                        <thead>
+                        <tr>
+                            <th>下属姓名</th>
+                            <th>饭补次数</th>
+                            <th>加班总时长</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="item in navigation">
+                            <td class="center span1">{{ item.employeeName }}</td>
+                            <td class="center span1">{{ item.dinnerCount }}</td>
+                            <td class="center span2">{{ item.workCount  }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/ng-template" id="leaveTime.html">
+    <div style="overflow:auto; max-height:600px;">
+        <button type="button" style="margin:5px 10px 0 0;" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <form class="form-horizontal" style="margin-top:5px;">
+            <div class="control-group">
+                <div style="margin: 10px">
+                    <table class="table table-hover table-bordered table-condensed">
+                        <caption><h4 style="text-align: center">请假数据统计</h4> <h5><br>{{timeFrom}}——{{timeTo}}</h5></caption>
+                        <thead>
+                        <tr>
+                            <th>员工姓名</th>
+                            <th >请假数据</th>
+                            <th>加请假总时长</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="center span1">{{ b }}</td>
+                            <td class="center span1"><span   data-ng-repeat="item in myLeave" class="center">{{ item.type}}：&nbsp{{item.duration}}小时<br></span></td>
+                            <td class="center span2">{{ myAllDuration  }}</td>
+                        </tr>
+                        </tbody>
+                        <thead>
+                        <tr>
+                            <th>下属姓名</th>
+                            <th>请假数据</th>
+                            <th>加请假总时长</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="it in lowLeave">
+                            <td class="center span1">{{ it.employeeName }}</td>
+                            <td class="center span1"><span  data-ng-repeat="he in lowLeave[$index].leaves" class="center">{{ he.type}}：&nbsp{{he.duration}}小时<br></span></td>
+                            <td class="center span2">{{ it.allDuration }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<form name="dataForm"id="dataForm" novalidate class="form-horizontal">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-reorder"></i> </span>
+                    <h5>加班设置</h5>
+                </div>
+
+                <div class="nopadding">
+                    <div class="widget-content">
+
+                        <div class="control-group">
+                            <label class="control-label">加班开始时间<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <input class="span2" name="beginTime" type="time" data-ng-model="formData.beginTime"  required />
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">饭补条件<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+
+                                <input class="span2" name="mealprice" data-ng-model="formData.dinnerTime"
+                                       onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">小时以上
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label class="control-label">饭补价位<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+
+                                <input class="span2" name="mealprice" data-ng-model="formData.mealprice"
+                                       onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"> 元 &nbsp &nbsp
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">工作有效日<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+
+                                <input class="span2" name="workday" data-ng-model="formData.workday"
+                                       onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"> 天 &nbsp &nbsp
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dataTables_paginate">
+                    <button style="margin: 20px 0"  type="button" rows="5" class="btn btn-success" data-ng-disabled="!isOK()" data-ng-click="saveData()">
+                        <i class="icon-save"></i> <span class="text">提交</span>
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</form>

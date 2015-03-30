@@ -1,0 +1,140 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12" style="position: relative;">
+            <div class="widget-box" style="position: absolute;left: 1%;width: 18% ">
+            <div class="widget-title bg_ly" ><span class="icon"><i class="icon-chevron-down"></i></span>
+                <h5>部门</h5>
+            </div>
+            <div class="widget-content" >
+                <div id="deptTreeSalary"></div>
+                <!--<button class="btn btn-success btn-small" style="margin: 10px" >
+                            <span class="text" ng-click="checkDeptAll()"><a style="color: #ffffff">
+                                <i class="icon-check"></i>全选</a></span>
+                </button>
+                <button class="btn btn-info btn-small" ng-show="!roleWhere&&deptSelection.length>0 " style="margin: 10px" >
+                            <span class="text"><a  data-placement="right" data-bs-popover="'createSalaryMonth1.html'" style="color: #ffffff">
+                                <i class="icon-briefcase"></i>生成部门薪资</a></span>
+                </button>-->
+            </div>
+            </div>
+            <div class="widget-box" style="position: absolute;right: 1%;width: 78%">
+                <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                    <h5>薪资调整</h5>
+                </div>
+
+
+                <div class="widget-content"  style="min-height:460px">
+                    <div class="dataTables_wrapper" >
+                        <div>
+                            <div class="dataTables_length form-horizontal" style="width: 100%;">
+                                <label style="width: 96%">
+                                  <!--  <select style="width: 150px;float: left;margin: 0 10px;" ng-model="searchTypeSelection" ng-options="searchType.selectName for searchType in searchTypes">
+                                    </select>
+                                    <input type="text" name="searchname" ng-model="searchname" placeholder="{{searchTypeSelection.placeholderText}}"
+                                           style="width: 150px;float: left;margin: 0 10px;" ng-keydown="enterSeacrh()"  />-->
+                                    <input type="text" name="searchname" ng-model="employeeText" placeholder="员工姓名、简拼、工号"
+                                           style="width: 150px;float: left;margin: 0 10px;" ng-keydown="enterSeacrh()"  />
+                                    <!--<div class="btn-group" style="margin-left: 10px">
+                                        <label ng-repeat="value in vm2.values" style="float: left">
+                                            <input type="checkbox" ng-model="vm2.selection['checked'+value.id]" value="{{value.id}}" ng-change="listenCheck()" />
+                                            <span style="position: relative;top: 3px">{{value.type}}</span>&nbsp;&nbsp;
+                                        </label>
+                                    </div>-->
+                                    <button style="margin-left: 10px" type="button" class="btn btn-success"  data-ng-click="loadGridData()">
+                                        <span class="text"><i class="icon-search"></i> 查询</span>
+                                    </button>
+                                    <div style="float:right;display: inline-block;margin-right: 0;">
+
+                                        <button class="btn btn-info" style="margin-left: 10px" ng-show="!roleWhere" data-placement="left" data-bs-popover="'createSalaryMonth2.html'">
+                                            <span class="text" ><a style="color: #ffffff"><i class="icon-briefcase"></i>{{actionNameCreateSalary}}</a></span>
+                                        </button>
+                                        <!--<button class="btn btn-info" style="margin-left: 10px" >
+                                            <span class="text"><a  data-placement="left" data-bs-popover="'passAll.html'" style="color: #ffffff"><i class="icon-briefcase"></i>奖金发放</a></span>
+                                        </button>-->
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <style>
+                            .gridStyleAg {
+                                border: 1px solid rgb(212,212,212);
+                                width: 100%;
+                                height: 380px;
+                            }
+                        </style>
+                        <div class="gridStyleAg" ng-grid="gridOptions" ></div>
+                        <div class="ui-toolbar ui-widget-header">
+                            <div class="dataTables_paginate">
+                                <button class="btn" data-ng-click="loadGridData(true)" data-ng-disabled="!hasManyData" data-ng-hide="isLoading">
+                                        <span data-ng-switch on="hasManyData">
+                                            <span data-ng-switch-when="true"><i class="icon-download-alt"></i> 更多</span>
+                                            <span data-ng-switch-when="false"><i class="icon-twitter"></i> 暂无</span>
+                                        </span>
+                                </button>
+                                <img data-ng-show="isLoading" src="./img/loading.gif" />
+                            </div>
+                        </div>
+
+                                <!--<div class="ui-toolbar ui-widget-header">
+                                    <div class="dataTables_filter">
+                                        <label>
+                                            <button class="btn btn-inverse" ng-show="b">
+                                                <span class="text"><a href="#!/set/pay/add" style="color: #ffffff">薪资绑定</a></span>
+                                            </button>
+                                            <button class="btn btn-primary" ng-show="b">
+                                                <span class="text"><a style="color: #ffffff;cursor: pointer" data-trigger="click" data-unique="1" data-placement="left" data-bs-popover="'time.html'">生成薪资表</a></span>
+                                            </button>
+                                        </label>
+                                    </div>
+
+                                </div>-->
+
+
+
+                        <!--<script type="text/ng-template" id="time.html">
+                            <div style="color: #000000;font-size: 9pt">生成 <input type="month" class="span8" ng-model="$parent.createDate"/> 薪资表</div>
+                            <div class="btn-group">
+                                <button style="margin-right: 10px;margin-top: 10px" data-ng-disabled="DateOk()" class="btn btn-mini btn-danger" data-ng-click="$parent.sendDate($parent.createDate);hide()"><i class="icon-plus"></i> <span class="text">生成</span></button>
+                                <button style="margin-top: 10px" class="btn btn-mini" data-ng-click="hide()"><i class="icon-share-alt"></i> <span class="text">取消</span></button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </script>-->
+                    </div>
+
+                    </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--
+<script type="text/ng-template" id="createSalaryMonth1.html" >
+
+    <ul class="activity-list">
+        <li>
+            <span class="text">生成月份 <i class="icon-caret-right"></i></span><input type="month" name="createSalaryMonthInp" ng-model="createSalaryMonthInp"/>
+            <img class="pull-right" ng-show="isLoading" src="./img/loading.gif" />
+        </li>
+    </ul>
+    <div class="pull-right"  ng-if="!isLoading" >
+        <button class="btn btn-mini btn-success" data-ng-click="$parent.createSalary('dept',createSalaryMonthInp,this);"><i class="icon-remove"></i> <span class="text">生成</span></button>
+        <span>&nbsp;</span>
+        <button class="btn btn-mini" data-ng-click="hide()"><i class="icon-share-alt"></i> <span class="text">取消</span></button>
+    </div>
+
+</script>-->
+<script type="text/ng-template" id="createSalaryMonth2.html" >
+    <ul class="activity-list">
+        <li>
+            <span class="text">生成月份 <i class="icon-caret-right"></i></span><input type="month" name="createSalaryMonthInp" ng-model="createSalaryMonthInp2"/>
+            <img class="pull-right" ng-show="isLoading" src="./img/loading.gif" />
+        </li>
+    </ul>
+    <div class="pull-right"  ng-if="!isLoading" >
+        <button class="btn btn-mini btn-success" data-ng-click="$parent.createSalary('employee',createSalaryMonthInp2,this);"><i class="icon-remove"></i> <span class="text">生成</span></button>
+        <span>&nbsp;</span>
+        <button class="btn btn-mini" data-ng-click="hide()"><i class="icon-share-alt"></i> <span class="text">取消</span></button>
+    </div>
+</script>

@@ -1,0 +1,108 @@
+<div class="widget-content nopadding" ng-controller="workOvertimeListOwnCtrl">
+    <div class="dataTables_wrapper">
+        <div>
+            <div class="dataTables_length form-horizontal" style="width: 100%">
+                <div style="width: 96%;margin: 5px;">
+                    <span style="float: left;margin: 3px 10px">从</span><input type="date" name="timeFrom1" ng-model="searchData.beginTime" style="width: 150px;float: left"/>
+                    <span style="float: left;margin: 3px 10px">到</span><input type="date" name="timeTo1" ng-model="searchData.endTime" style="width: 150px;float: left"/>
+<!--
+                    <input type="text" name="searchname" ng-model="employeeText1" placeholder="员工姓名、简拼、工号" style="width: 150px;float: left;margin: 0 10px;" />
+-->
+                    <div class="btn-group" style="margin-left: 10px">
+                        <label ng-repeat="value in vm.values" style="float: left">
+                            <input type="checkbox" ng-checked="true" ng-model="vm.selection['checked'+value.id]" value="{{value.id}}" ng-change="listenCheck('own')" />
+                            <span style="position: relative;top: 3px">{{value.type}}</span>&nbsp;&nbsp;
+                        </label>
+                    </div>
+                    <button style="margin-left: 10px" type="button" class="btn btn-success" data-ng-click="loadGridDataOwn(null,'own')">
+                        <span class="text"><i class="icon-search"></i> 查询</span>
+                    </button>
+                    <div style="float:right;display: inline-block;margin-right: 0;">
+                        <a class="btn btn-primary" style="margin-left: 10px" href="#!/workOvertime/add" >
+                            <span class="text" style="color: #ffffff"><i class="icon-tag"></i> 加班</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered" style="border-bottom: 1px solid #cccccc;border-top: 1px solid #cccccc;" data-kz-table-fixed-header>
+            <thead>
+            <tr>
+                <th hidden="true">
+                    extraWorkId
+                </th>
+
+                <th class="span1">
+                    员工姓名
+                </th>
+                <th class="span2">
+                    加班开始时间
+                </th>
+                <th class="span2">
+                    加班结束时间
+                </th>
+                <th class="span1">
+                    加班时长
+                </th>
+                <th class="span1">
+                    饭补
+                </th>
+                <th class="span1">
+                    加班类型
+                </th>
+               <!-- <th class="span1">
+                    休息日
+                </th>-->
+                <th class="span2">
+                    加班说明
+                </th>
+                <th class="span1">
+                    状态
+                </th>
+                <th class="span2">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-class="{'delete-line':item.isDelete}" data-ng-repeat="item in data">
+                <td hidden="true">{{ item.extraWorkId }}</td>
+
+                <td class="center">{{ item.employeeName }}</td>
+                <td class="center" >{{ parseDate(item.beginTime)| date : 'yyyy年MM月dd日 HH点mm分' }};{{ parseDateWeek(item.beginTime)}}</td>
+                <td class="center" >{{ parseDate(item.endTime)| date : 'yyyy年MM月dd日 HH点mm分' }};{{ parseDateWeek(item.endTime)}}</td>
+                <td class="center">{{ item.duration }}</td>
+                <td class="center">{{ item.dinner==1?'√': '' }}</td>
+                <td class="center">{{ item.isSalary==1?'日常加班 ': '节假日加班' }}</td><!--
+                <td class="center">{{ item.isWeekend==1?'√': '' }}</td>-->
+                <td title="{{ item.reason }}">{{ item.reason }}</td>
+                <td class="center">{{ passTypeList(item.statusId) }}</td>
+                <td class="center" >
+                    <span class="btn-primary btn-small margin" data-ng-show="item.statusId ==0||item.statusId ==1||item.statusId ==5">
+                        <a  style="color: #ffffff" href="#!/workOvertime/edit/{{ item.extraWorkId  }}">
+                            <i class="icon-edit"></i> 编辑</a>
+                    </span>
+
+                    <span class="btn-inverse btn-small margin">
+                        <a  style="color: #ffffff" href="" data-ng-click="showTrackData(item.extraWorkId )">
+                            <i class="icon-truck"></i> 轨迹</a>
+                    </span>
+                    <span class="btn-danger btn-small margin" data-ng-show="item.invalid!=1" data-trigger="click" data-unique="1" data-placement="left" data-title="提示" data-bs-popover="'deleteItem.html'">
+                        <a href="" style="color: #ffffff"><i class="icon-remove"></i> 作废</a>
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="ui-toolbar ui-widget-header">
+            <div class="dataTables_paginate">
+                <button class="btn" data-ng-click="loadGridDataOwn(null,'own',true)" data-ng-disabled="!hasManyData" data-ng-hide="isLoading">
+                    <span data-ng-switch on="hasManyData">
+                        <span data-ng-switch-when="true"><i class="icon-download-alt"></i> 更多</span>
+                        <span data-ng-switch-when="false"><i class="icon-twitter"></i> 暂无</span>
+                    </span>
+                </button>
+                <img data-ng-show="isLoading" src="./img/loading.gif" />
+            </div>
+        </div>
+    </div>
+</div>

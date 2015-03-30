@@ -1,0 +1,236 @@
+<div class="container-fluid">
+
+    <div class="widget-box">
+        <div class="widget-title"><span class="icon"> <i class="icon-reorder"></i> </span>
+            <h5>{{title}}</h5>
+        </div>
+        <form action="#" method="get" id="addEMPFormTempData" name="addEMPFormTempData" class="form-horizontal">
+
+            <div class="row-fluid">
+                <h4 class="text-left span7" style="margin-left: 10%">【{{formTempData.employeeName}}】个人信息---{{statusMap[formTempData.status]}}</h4>
+                <button style="width: 6%;" type="button" rows="5" class="btn btn-info" ng-if="authFlag.employeeEdit" ng-show="!$editing"
+                        data-ng-click="edit()">
+                    <i class="icon-edit"></i> <span class="text">编辑</span>
+                </button>
+                <button style="width: 6%;" type="button" rows="5" class="btn btn-danger" data-ng-click="dismissal()" ng-if="authFlag.dismissal" ng-show="!$editing&&formTempData.status!=3">
+                    <i class="icon-briefcase"></i> <span class="text">解聘</span>
+                </button>
+                <button style="width: 6%;" type="button" rows="5" class="btn btn-success" data-ng-click="positive()" ng-if="authFlag.positive" ng-show="!$editing&&formTempData.status==1">
+                    <i class="icon-check"></i> <span class="text">转正</span>
+                </button>
+                <div class="widget-content">
+                    <div class="controls text-error" style="margin-right: 10px" ng-show="addEMPFormTempData.phone.$error.pattern">错误电话号码</div>
+                    <style>
+                       #addEMPFormTempData .disabled{
+                           line-height: 30px;margin-left: 15%
+                       }
+                    </style>
+                    <div class="control-group">
+                        <div class="clearfix"></div>
+                        <div class="control-group span4">
+                            <label class="control-label">姓名<span style="margin-left: 5px;"
+                                                                 ng-show="$editing" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <input ng-show="$editing" type="text" name="employeeName"  data-ng-model="formTempData.employeeName" required/>
+                                <h5 ng-show="!$editing" style="line-height: 10px;margin-left: 35px;">{{formTempData.employeeName}}</h5>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">性别<span style="margin-left: 5px;"
+                                                                 ng-show="$editing" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <label ng-show="$editing" ng-repeat="sexItem in dic.sexDic" class="span2" style="line-height: 30px;margin-left: 15%">
+                                    <input type="radio" style="margin: 0;" ng-checked="sexItem.id==formTempData.sex" name="sexRadio" ng-model="formTempData.sex" value="{{sexItem.id}}" />{{sexItem.text}}
+                                </label>
+                                <span ng-show="!$editing" class="disabled">{{formTempData.sex==1?'男':'女'}}</span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="control-group span4">
+                            <label class="control-label">身份证<span style="margin-left: 5px;"
+                                                                  ng-show="$editing" class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input ng-show="$editing" type="text" ng-show="$editing" data-ng-model="formTempData.idNumber" />
+                                <div class="disabled" ng-show="!$editing">{{formTempData.idNumber}}</div>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">籍贯<span style="margin-left: 5px;"
+                                                                 ng-show="$editing" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <input ng-show="$editing" type="text"  data-ng-model="formTempData.nativePlace" required/>
+                                <div class="disabled" ng-show="!$editing">{{formTempData.nativePlace}}</div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="control-group span4">
+                            <label class="control-label">联系电话<span style="margin-left: 5px;"
+                                                                   ng-show="$editing" class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input ng-show="$editing" type="text" name="phone" data-ng-model="formTempData.phone" ng-pattern="/^\d*-?\d*$/" required/>
+                                <div class="disabled" ng-show="!$editing">{{formTempData.phone}}</div>
+                            </div>
+                        </div>
+
+                        <div class="control-group span4">
+                            <label class="control-label">政治面貌<span style="margin-left: 5px;"
+                                                                   ng-show="$editing" class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input ng-show="$editing" type="text"  data-ng-model="formTempData.politicalStatus" required/>
+                                <div class="disabled" ng-show="!$editing">{{formTempData.politicalStatus}}</div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="control-group span4">
+                            <label class="control-label">邮箱<span style="margin-left: 5px;"
+                                                                 ng-show="$editing" class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input ng-show="$editing" type="email" name="email" data-ng-model="formTempData.email" required/>
+                                <div class="disabled" ng-show="!$editing">{{formTempData.email}}</div>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">出生年月<span style="margin-left: 5px;"
+                                                                   ng-show="$editing" class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input ng-show="$editing" type="date"  data-ng-model="formTempData.birthday" required/>
+                                <div class="disabled" ng-show="!$editing">{{formTempData.birthday|date : 'yyyy年MM月dd日'}}</div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="control-group span4">
+                            <label class="control-label">家庭住址<span style="margin-left: 5px;"
+                                                                   ng-show="$editing" class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input ng-show="$editing" type="text"  data-ng-model="formTempData.location" required/>
+                                <div class="disabled" ng-show="!$editing">{{formTempData.location}}</div>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">学历<span style="margin-left: 5px;"
+                                                                 ng-show="$editing" class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <select  ng-show="$editing" ng-model="formTempData.education" ng-options="education.text as education.text for education in dic.educationDic" required >
+                                </select>
+                                <div class="disabled" ng-show="!$editing">{{formTempData.education}}</div>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">毕业院校<span style="margin-left: 5px;"
+                                                                   ng-show="$editing" class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input ng-show="$editing" type="text"  data-ng-model="formTempData.graduation" required/>
+                                <div class="disabled" ng-show="!$editing">{{formTempData.graduation}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="line" style="margin: 7px"/>
+                    <div class="control-group">
+                        <div class="clearfix"></div>
+                        <div class="control-group span4">
+                            <label class="control-label">职务<span style="margin-left: 5px;"
+                                                                 ng-show="$editing" class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <select ng-show="$editing" ng-model="formTempData.positionId" ng-options="position.positionId as position.positionName for position in dic.positionDic" required>
+                                </select>
+                                <div class="disabled" style="line-height: 10px;" ng-show="!$editing">{{formTempData.positionName}}</div>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">岗位<span style="margin-left: 5px;"
+                                                                 ng-show="$editing" class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <select ng-show="$editing" ng-model="formTempData.jobs" ng-options="jobs for jobs in dic.jobsDic" required>
+                                </select>
+                                <div class="disabled" ng-show="!$editing">{{formTempData.jobs}}</div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="control-group span4">
+                            <label class="control-label">入职时间<span style="margin-left: 5px;"
+                                                                   ng-show="$editing"  class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input type="date" ng-show="$editing" data-ng-model="formTempData.joinDate" required/>
+
+                                <div class="disabled" ng-show="!$editing">{{formTempData.joinDate|date : 'yyyy年MM月dd日'}}</div>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">部门<span style="margin-left: 5px;"
+                                                                 ng-show="$editing"  class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <!-- <span class="btn" style="margin: 0 10px;" data-placement="bottom" data-bs-popover="'leaveTypeOptions.html'" ng-click="loadTree()">
+                                    <span style="color: #808080">{{formTempData.deptName}}</span>
+                                </span>-->
+                                <input ng-show="$editing" type="text" id="editEmpDeptTree" ng-model="formTempData.deptName" value="{{formTempData.deptName}}" placeholder="请选择部门"  required>
+                                </input>
+
+                                <div class="disabled" ng-show="!$editing">{{formTempData.deptName}}</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr class="line" style="margin: 7px"/>
+                    <div class="control-group">
+                        <div class="clearfix"></div>
+                        <div class="control-group span4">
+                            <label class="control-label">直属上级<span style="margin-left: 5px;"
+                                                                   ng-show="$editing"  class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <div ng-show="$editing" id="editParentId" ></div>
+                                <a class="disabled" target="view_frame" ng-if="!$editing" style="color: #307DFF;" href="#!employee/detailEmployee/{{formTempData.parentId}}/0" >{{formTempData.parentName}}</a>
+                            </div>
+                        </div>
+                        <div class="control-group span7">
+                            <label class="control-label">下级员工</label>
+
+                            <div class="controls">
+                                <span ng-if="formTempData.children.length&&formTempData.children.length>0" ng-repeat="employeeChild in formTempData.children" id="{{'childEmployeeListSpan'+employeeChild.employeeId}}">
+                                    <a ng-show="$editing" class="btn btn-small"  ng-click="editChildOfParent(employeeChild)" style="margin-left: 1%">{{employeeChild.employeeName}}</a>
+                                    <span ng-show="$editing&&$childEditing&&$childEditingId==employeeChild.employeeId" >
+                                        <span style="margin-right: 5px;" id="{{'editChildParentId'+employeeChild.employeeId}}"></span>
+                                        <a class="btn btn-small btn-success" ng-click="saveEditedChildOfParent(employeeChild)">保存</a>
+                                    </span>
+                                    <a style="margin-left: 1%;color: #307DFF;" target="view_frame"  href="#!employee/detailEmployee/{{employeeChild.employeeId}}/0" class="disabled" ng-show="!$editing">{{employeeChild.employeeName}}</a>
+                                    <span style="margin-left: 1%" ng-show="formTempData.children.length&&$index!=(formTempData.children.length-1)&&!$editing">/</span>
+                               </span>
+                            </div>
+                        </div>
+                    </div><!--
+                    <p style="margin-left: 10%" ng-show="addEMPFormTempData.phone.$error.pattern" class="text-error">电话号码无效</p>-->
+                    <p style="margin-left: 10%" ng-show="addEMPFormTempData.email.$error.pattern" class="text-error">电子邮件无效</p>
+<!--
+                    <p style="margin-left: 10%" ng-show="addEMPFormTempData.employeeName.$error.required" class="text-error">姓名不能为空</p>
+-->
+                </div>
+            </div>
+        </form>
+        <div class="dataTables_paginate">
+            <button ng-show="$editing" style="margin: 20px 20px;width: 10%;" type="button" rows="5" class="btn btn-success" data-ng-disabled="!addEMPFormTempData.$valid||!formTempData.deptId"
+                    data-ng-click="saveData()">
+                <i class="icon-save"></i> <span class="text">提交</span>
+            </button>
+            <button ng-show="$editing" style="margin: 20px 20px;width: 10%;" type="button" rows="5" class="btn btn-warning" data-ng-click="reset()">
+                <i class="icon-refresh"></i> <span class="text">重置</span>
+            </button>
+            <button  ng-show="$editing" style="margin: 20px 20px;width: 10%;" type="button" rows="5" class="btn btn-danger" data-ng-click="$editing=false;$childEditing = false;">
+                <i class="icon-remove"></i> <span class="text">取消</span>
+            </button>
+        </div>
+
+    </div>
+
+</div>

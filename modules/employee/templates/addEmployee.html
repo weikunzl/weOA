@@ -1,0 +1,192 @@
+<div class="container-fluid">
+
+    <div class="widget-box">
+        <div class="widget-title"><span class="icon"> <i class="icon-reorder"></i> </span>
+            <h5>{{title}}</h5>
+        </div>
+        <form action="#" method="get" name="addEMPFormTempData" class="form-horizontal">
+            <div class="row-fluid">
+                <div class="widget-content">
+                    <div class="controls text-error" style="margin-right: 10px" ng-show="addEMPFormTempData.phone.$error.pattern">错误电话号码</div>
+                    <div class="control-group">
+                        <div class="clearfix"></div>
+                        <div class="control-group span4">
+                            <label class="control-label">姓名<span style="margin-left: 5px;"
+                                                                 class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input type="text" name="employeeName"  data-ng-model="formTempData.employeeName" required/>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">性别<span style="margin-left: 5px;"
+                                                                 class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <label ng-repeat="sexItem in dic.sexDic" class="span2" style="line-height: 30px;margin-left: 15%">
+                                    <input type="radio" style="margin: 0;" ng-checked="sexItem.id==formTempData.sex" name="sexRadio" ng-model="formTempData.sex" value="{{sexItem.id}}" />{{sexItem.text}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="control-group span4">
+                            <label class="control-label">身份证<span style="margin-left: 5px;"
+                                                                  class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input type="text"  data-ng-model="formTempData.idNumber" required/>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">籍贯<span style="margin-left: 5px;"
+                                                                 class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input type="text"  data-ng-model="formTempData.nativePlace" required/>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">联系电话<span style="margin-left: 5px;"
+                                                                   class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input type="text" name="phone" data-ng-model="formTempData.phone" ng-pattern="/^\d*-?\d*$/" required/>
+                            </div>
+                        </div>
+
+                        <div class="control-group span4">
+                            <label class="control-label">政治面貌<span style="margin-left: 5px;"
+                                                                   class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input type="text"  data-ng-model="formTempData.politicalStatus" required/>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">邮箱<span style="margin-left: 5px;"
+                                                                 class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input type="email" name="email" data-ng-model="formTempData.email" required/>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">出生年月<span style="margin-left: 5px;"
+                                                                   class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input type="date"  data-ng-model="formTempData.birthday" required/>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">家庭住址<span style="margin-left: 5px;"
+                                                                   class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input type="text"  data-ng-model="formTempData.location" required/>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">学历<span style="margin-left: 5px;"
+                                                                 class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <select ng-model="formTempData.education" ng-options="education.text as education.text for education in dic.educationDic" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">毕业院校<span style="margin-left: 5px;"
+                                                                   class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input type="text"  data-ng-model="formTempData.graduation" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="line" style="margin: 7px"/>
+                    <div class="control-group">
+                        <div class="clearfix"></div>
+                        <div class="control-group span4">
+                            <label class="control-label">职务<span style="margin-left: 5px;"
+                                                                 class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <select ng-model="formTempData.positionId" ng-options="position.positionId as position.positionName for position in dic.positionDic" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group span4">
+                            <label class="control-label">岗位<span style="margin-left: 5px;"
+                                                                 ng-show="$editing" class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <select ng-model="formTempData.jobs" ng-options="jobs for jobs in dic.jobsDic" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="control-group span4">
+                            <label class="control-label">入职时间<span style="margin-left: 5px;"
+                                                                   class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <input type="date"  data-ng-model="formTempData.joinDate" required/>
+                            </div>
+                        </div>
+
+                        <div class="control-group span4">
+                            <label class="control-label">部门<span style="margin-left: 5px;"
+                                                                 class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <!-- <span class="btn" style="margin: 0 10px;" data-placement="bottom" data-bs-popover="'leaveTypeOptions.html'" ng-click="loadTree()">
+                                    <span style="color: #808080">{{formTempData.deptName}}</span>
+                                </span>-->
+                                <input type="text" id="addEmpDeptTree" ng-model="formTempData.deptName" placeholder="请选择部门"  required>
+                                </input>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="line" style="margin: 7px"/>
+                    <div class="control-group">
+                        <div class="clearfix"></div>
+                        <div class="control-group span4">
+                            <label class="control-label">直属上级<span style="margin-left: 5px;"
+                                                                   class="badge badge-important">必填</span></label>
+
+                            <div class="controls">
+                                <!--<input type="text" style="width: 100%;" select2 select2Model="formTempData.parentId" data-ng-model="formTempData.parentId" config="employeeListConfig" >
+                                </input>-->
+                                <div id="parentId" ></div>
+                                <!--
+                                                                <select data-ng-model="formTempData.parentId" ng-options="employeeData.employeeId as employeeData.employeeName for employeeData in dic.employeeList" required>
+                                -->
+
+                                </select>
+                            </div>
+                        </div>
+                    </div><!--
+                    <p style="margin-left: 10%" ng-show="addEMPFormTempData.phone.$error.pattern" class="text-error">电话号码无效</p>-->
+                    <p style="margin-left: 10%" ng-show="addEMPFormTempData.email.$error.pattern" class="text-error">电子邮件无效</p>
+<!--
+                    <p style="margin-left: 10%" ng-show="addEMPFormTempData.employeeName.$error.required" class="text-error">姓名不能为空</p>
+-->
+                </div>
+            </div>
+        </form>
+        <div class="dataTables_paginate">
+            <button style="margin: 20px 20px;width: 10%;" type="button" rows="5" class="btn btn-success" data-ng-disabled="!addEMPFormTempData.$valid||!formTempData.deptId"
+                    data-ng-click="saveData()">
+                <i class="icon-save"></i> <span class="text">提交</span>
+            </button>
+            <button style="margin: 20px 20px;width: 10%;" type="button" rows="5" class="btn btn-warning" data-ng-click="reset()">
+                <i class="icon-refresh"></i> <span class="text">重置</span>
+            </button>
+            <!--<button style="margin: 20px 20px;width: 10%;" type="button" rows="5" class="btn btn-danger" data-ng-click="$editing=false">
+                <i class="icon-stop"></i> <span class="text">取消</span>
+            </button>-->
+        </div>
+
+    </div>
+
+</div>

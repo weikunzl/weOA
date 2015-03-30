@@ -1,0 +1,138 @@
+<div class="widget-content nopadding" ng-controller="leaveListOwnCtrl">
+    <div class="dataTables_wrapper">
+        <div>
+            <div class="dataTables_length form-horizontal" style="width: 100%">
+                <div style="width: 96%;margin: 5px;">
+                    <span style="float: left;margin: 3px 10px">从</span><input type="date" name="timeFrom1" ng-model="searchData.beginTime" style="width: 150px;float: left"/>
+                    <span style="float: left;margin: 3px 10px">到</span><input type="date" name="timeTo1" ng-model="searchData.endTime" style="width: 150px;float: left"/>
+                    <!--
+                                        <input type="text" name="searchname" ng-model="employeeText1" placeholder="员工姓名、简拼、工号" style="width: 150px;float: left;margin: 0 10px;" ng-keydown="enterSeacrh()"/>
+                    -->
+                    <!--<select style="margin-left: 10px;width: 10%;" ng-model="leaveTypeSelection" ng-options="leaveType.type for leaveType in leaveTypes" ng-change="loadGridDataOwn('own')">
+                        <option value="">全部</option>
+                    </select>-->
+                    <span class="btn" style="margin: 0 10px;" data-placement="bottom" data-bs-popover="'leaveTypeOptions.html'">
+                        <span style="color: #808080">请假类型</span>
+                    </span>
+                    <div class="btn-group" style="margin-left: 10px">
+                        <label ng-repeat="value in vm.values" style="float: left">
+                            <input type="checkbox" ng-checked="true" ng-model="vm.selection['checked'+value.id]" value="{{value.id}}" ng-change="listenCheck('own')" />
+                            <span style="position: relative;top: 3px">{{value.type}}</span>&nbsp;&nbsp;
+                        </label>
+                        <label style="float: left">
+                            <input type="checkbox" ng-model="searchData.invalid" ng-change="loadGridDataOwn(null,'own')" />
+                            <span style="position: relative;top: 3px;color: #d60000">已作废</span>&nbsp;&nbsp;
+                        </label>
+                    </div>
+                    <button style="margin-left: 10px" type="button" class="btn btn-success" data-ng-click="loadGridDataOwn(null,'own')">
+                        <span class="text"><i class="icon-search"></i> 查询</span>
+                    </button>
+                    <button class="btn btn-info" style="float:right;">
+                        <span class="text"><a href="#!/leave/add" style="color: #ffffff"><i class="icon-tag"></i>请假</a></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered" style="border-bottom: 1px solid #cccccc;border-top: 1px solid #cccccc;" data-kz-table-fixed-header>
+            <thead>
+            <tr>
+                <th class="span1">
+                    员工姓名
+                </th>
+                <th class="span1">
+                    请假类型
+                </th>
+                <th class="span2">
+                    请假开始时间
+                </th>
+                <th class="span2">
+                    请假结束时间
+                </th>
+                <th class="span1">
+                    请假时长
+                </th>
+                <th class="span2">
+                    请假原因
+                </th>
+                <th class="span1">
+                    状态
+                </th>
+                <th class="span2">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-class="{'delete-line':item.isDelete}" data-ng-repeat="item in data">
+                <td class="center">{{ item.employeeName }}</td>
+                <td class="center">{{ item.leaveType }}</td>
+                <td class="center" >{{ parseDate(item.beginTime)| date : 'yyyy年MM月dd日 HH点mm分' }};{{ parseDateWeek(item.beginTime)}}</td>
+                <td class="center" >{{ parseDate(item.endTime)| date : 'yyyy年MM月dd日 HH点mm分' }};{{ parseDateWeek(item.endTime)}}</td>
+                <td class="center">{{ item.duration }}</td>
+                <td title="{{ item.reason }}">{{ item.reason }}</td>
+                <td class="center">{{ passTypeList[item.statusId] }}</td>
+                <td class="center">
+                    <span class="btn-primary btn-small margin" data-ng-show="item.statusId == 4&&item.statusId != 3">
+                        <a data-ng-click="removeLeave(item)" style="color: #ffffff"> <!-- href="#!/leave/remove/{{ item.leaveId }}" -->
+                            <i class="icon-external-link"></i> 销假</a>
+                    </span>
+                    <span class="btn-danger btn-small margin" data-ng-show="item.invalid!=1" >
+                        <a data-ng-click="deleteItem(item)" style="color: #ffffff"> <!-- href="#!/leave/remove/{{ item.leaveId }}" -->
+                            <i class="icon-remove"></i> 作废</a>
+                    </span>
+
+                    <span class="btn-primary btn-small margin"  data-ng-show="item.statusId ==0||item.statusId ==1||item.statusId ==5">
+                        <a href="#!/leave/edit/{{ item.leaveId }}" style="color: #ffffff">
+                            <i class="icon-edit"></i> 编辑</a>
+                    </span>
+
+                    <span class="btn-inverse btn-small margin">
+                        <a data-ng-click ="showTrackData(item.leaveId)" style="color: #ffffff">
+                            <i class="icon-truck"></i> 轨迹</a>
+                    </span>
+
+                   <!-- <span class="btn-danger btn-small margin" data-ng-show="item.statusId == 4||item.statusId == 5||item.statusId == 3" data-trigger="click" data-unique="1" data-placement="left" data-title="提示" data-bs-popover="'deleteItem.html'">
+                        <a href="" style="color: #ffffff"><i class="icon-remove"></i>删除</a>
+                    </span>-->
+                    <!--<span class="btn-small btn-warning margin" data-ng-show="(item.statusId ==6)" data-trigger="click" data-unique="1" data-placement="left" data-bs-popover="'reject.html'">
+                        <a style="color: #ffffff" href=""><i class="icon-legal"></i>驳回</a>
+                    </span>
+                    <span class="btn-success btn-small margin" data-ng-show="(item.statusId == 6)" data-trigger="click" data-unique="1" data-placement="left" data-bs-popover="'pass.html'">
+                        <a href="" style="color: #ffffff"><i class="icon-check"></i>同意</a>
+                    </span>-->
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="ui-toolbar ui-widget-header">
+            <div class="dataTables_paginate">
+                <button class="btn" data-ng-click="loadGridDataOwn(null,'own',true)" data-ng-disabled="!hasManyData" data-ng-hide="isLoading">
+                        <span data-ng-switch on="hasManyData">
+                            <span data-ng-switch-when="true"><i class="icon-download-alt"></i> 更多</span>
+                            <span data-ng-switch-when="false"><i class="icon-twitter"></i> 暂无</span>
+                        </span>
+                </button>
+                <img data-ng-show="isLoading" src="./img/loading.gif" />
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/ng-template" id="leaveTypeOptions.html" >
+
+    <div class="btn-group" >
+        <label style="display: inline-block">
+            <input type="checkbox" ng-model="checkAllLeaveTypeFlag" ng-checked="checkAllLeaveTypeFlag==undefined||checkAllLeaveTypeFlag"  ng-click="$parent.checkAllLeaveType(checkAllLeaveTypeFlag,'own')"/>
+            <span style="position: relative;top: 3px;font-size: 18px;font-weight: 600">全选</span>&nbsp;&nbsp;
+        </label>
+        <label style="float: right;right: 20px" ng-click="hide()">x</label>
+        <hr style="margin: 2px"/>
+        <label style="float: left" ng-repeat="value in $parent.leaveTypes" >
+            <input type="checkbox" value="{{value.id}}"
+                   ng-click="$parent.searchDataLeaveType(value.id,$parent.searchData)"  ng-checked="$parent.searchData.leaveTypeId.indexOf(value.id)>-1"/>
+            <span style="position: relative;top: 3px">{{value.type}}</span>&nbsp;&nbsp;
+        </label>
+    </div>
+
+</script>

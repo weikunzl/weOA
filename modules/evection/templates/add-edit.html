@@ -1,0 +1,61 @@
+<form name="dataForm"id="dataForm" novalidate class="form-horizontal">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-reorder"></i> </span>
+                    <h5>申请出差</h5>
+                </div>
+                <div class="nopadding">
+                    <div class="widget-content">
+                        <div class="control-group">
+                            <label class="control-label">出差天数<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <input class="span1" type="number" name="duration" disabled data-ng-model="formTempData.day" required
+                                        onkeyup="value=value.replace(/[^\d.]/g,0)"
+                                        onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,0))">天 &nbsp <span style="color: red"></span>
+                                 </div>
+                        </div>
+                       <!-- <div class="control-group">
+                            <label class="control-label">出差类型<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <div class="btn-group">
+                                    <label ng-repeat="value in leaveTypes" style="float: right">
+                                        <input  data-ng-disabled="value.id==leaveTypeExc&&!leaveTypeExcFlag()" type="radio" name="typeId" ng-model="formData.typeId" ng-value="value.id" ng-change="checkExchange(value)"/>
+                                        <span style="position: relative;top: 3px;margin-right: 20px">{{ value.type }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>-->
+
+                        <div class="control-group">
+                            <label class="control-label">开始日期<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <input class="span3" name="beginTime" type="date" data-ng-model="formTempData.beginTime"  required ng-change="getDay()"/>
+                            </div>
+                        </div>
+
+                        <div class="control-group" >
+                            <label class="control-label">结束日期<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <input class="span3" name="endTime" type="date" data-ng-model="formTempData.endTime"  required ng-change="getDay()"/>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">出差说明<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <textarea class="span4" name="reason" type="text" data-ng-model="formData.reason"  required ></textarea>
+                            </div>
+                        </div>
+                        <p style="margin-left: 7%" class="text-error">{{errorTip}}</p>
+                    </div>
+                </div>
+                <div class="dataTables_paginate">
+                    <button  style="margin: 20px 0"  type="button" rows="5" class="btn btn-success" data-ng-disabled="!dataForm.$valid" data-ng-click="saveData()">
+                        <i class="icon-save"></i> <span class="text">提交</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

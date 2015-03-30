@@ -1,0 +1,48 @@
+
+<div class="widget-box">
+
+    <div class="widget-content nopadding">
+        <div style="text-align: center;font-size: 20pt;margin: 15px 0">
+            <select ng-change="edit(data)" style="margin-top: 6px" ng-model="employeeId" ng-options="city.employeeId as city.employeeName for city in vm.cities">
+                <option value="">-- 请选择员工 --</option>
+            </select>
+        </div>
+        <div style="text-align: center;margin: 0 auto;width: 170px;height: 50px">
+            <span style="float: left;margin-top: 1px;margin-right: 1px">薪资绑定开始时间：</span><label  ng-bind="timeFrom" style="float: left"/>
+        </div>
+        <div class="dataTables_wrapper">
+            <table class="table table-bordered" style="border-bottom: 1px solid #cccccc;border-top: 1px solid #cccccc;" data-kz-table-fixed-header>
+                <thead>
+                <tr>
+                    <th class="span6">
+                        工资类型
+                    </th>
+                    <th class="span6">薪资数额</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-class="{'delete-line':item.isDelete}" data-ng-repeat="item in data">
+                    <td class="center">{{ item.salaryTypeName }}</td>
+                    <td class="center">
+                        <input ng-change="edit(data)" onKeyUp="value=value.replace(/[^\-?\d.]/g,'')
+                         " value="" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
+                              type="text" required=""  style="text-align: center" ng-model="item.salary"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="ui-toolbar ui-widget-header">
+
+                <div class="dataTables_paginate">
+                    <button class="btn btn-info" data-ng-click="saveEditData(data)"
+                            data-ng-disabled="submit">
+                        <a href="" style="color: #ffffff"><i class="icon-edit"></i> 保存</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

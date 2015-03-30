@@ -1,0 +1,67 @@
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" style="margin:5px 10px 0 0;" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+            <h4 class="modal-title">【{{userInfo.employeeName}}】修改个人信息</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row-fluid">
+                <form action="#" method="get" name="userInfoEditForm" class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">联系电话</label>
+                        <div class="controls">
+                            <input type="text" name="phone" data-ng-model="userInfo.phone" ng-pattern="/^\d*-?\d*$/" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">邮箱</label>
+
+                        <div class="controls">
+                            <input type="email" name="email" data-ng-model="userInfo.email" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">家庭住址</label>
+                        <div class="controls">
+                            <input type="text" data-ng-model="userInfo.location"/>
+                        </div>
+                    </div>
+                    <hr class="line"/>
+                    <div class="control-group">
+                        <label  class="control-label">原始密码</label>
+                        <div class="controls">
+                            <input type="password" class="form-control" ng-model="userInfo.password" id="password" placeholder="原始输入密码" >
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" >设置新密码</label>
+                        <div class="controls">
+                            <input type="password" class="form-control" ng-model="userInfo.newPassword" id="newPassword" data-ng-minlength="6" placeholder="新输入密码"  >
+                        </div>
+                    </div>
+                    <div class="control-group">
+                            <label class="control-label" >重复新密码</label>
+                        <div class="controls">
+                            <input type="password" class="form-control" ng-model="newPasswordRe" id="newPasswordRe" data-ng-minlength="6" placeholder="重复输入密码" >
+
+                            <!--<p ng-show="(newPassword+'').length<6" class="help-block">密码必须超过六位.</p>-->
+                        </div>
+                        <p style="margin-left: 15%" ng-show="userInfoEditForm.$valid&&newPasswordRe.length>5&&userInfo.newPassword!=newPasswordRe" class="help-block"><i class="icon-exclamation-sign text-error"></i>两次输入的密码不一致</p>
+                        <p style="margin-left: 15%" ng-show="userInfoEditForm.$error.pattern" class="help-block"><i class="icon-exclamation-sign text-error"></i>请输入有效的电话号码</p>
+                        <p style="margin-left: 15%" ng-show="userInfoEditForm.$error.password" class="help-block"><i class="icon-exclamation-sign text-error"></i>密码错误</p>
+                        <p style="margin-left: 15%" ng-show="errorTip" class="help-block"><i class="icon-exclamation-sign text-error"></i>{{errorTip}}</p>
+                        <p style="margin-left: 15%" ng-show="!userInfoEditForm.$error.pattern&&userInfoEditForm.$error.email" class="help-block"><i class="icon-exclamation-sign text-error"></i>请输入有效的Email</p>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            <button type="button" class="btn btn-primary"  ng-click="setPassword()" data-ng-disabled="!userInfoEditForm.$valid||userInfo.newPassword!=newPasswordRe" aria-hidden="true">提交</button>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+

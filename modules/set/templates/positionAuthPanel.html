@@ -1,0 +1,42 @@
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" style="margin:5px 10px 0 0;" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">职务权限绑定</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row-fluid">
+                <form action="#" method="get" class="form-horizontal">
+
+
+                    <div class="control-group">
+                        <label class="control-label">职务<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                        <div class="controls">
+                            <select ng-model="positionSelected" ng-options="position.positionName for position in positionList"  ng-change="positionAuthSelectChange()">
+                                <option value="">-- 请选择 --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">权限树<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                        <div class="controls">
+                            <!--<select ng-model="deptSelected" ng-options="dept.deptName for dept in deptDataSelect" required>
+                                <option value="">-- 请选择 --</option>
+                            </select>-->
+                            <div id="positionAuthInputTree" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+        <button type="button" class="btn btn-success" data-ng-disabled="!authSelected||authSelected.length==0||!positionSelected" ng-click="submitPositionAuth();" aria-hidden="true">保存</button>
+    </div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+

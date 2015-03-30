@@ -1,0 +1,96 @@
+<form name="dataForm"id="dataForm" novalidate class="form-horizontal">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-reorder"></i> </span>
+                    <h5>假条</h5>
+                </div>
+                <div class="nopadding">
+                    <div class="widget-content">
+                        <div class="control-group">
+                            <label class="control-label">请假时长<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <input class="span1" type="number" name="duration" data-ng-model="formTempData.day" required
+                                        onkeyup="value=value.replace(/[^\d.]/g,0)"
+                                        onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,0))">天 &nbsp <span style="color: red"></span>
+                                 <input class="span1" name="duration" data-ng-model="formTempData.hour" required type="number"
+                                        onkeyup="value=value.replace(/[^\d.]/g,0)"
+                                        onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,0))">小时 &nbsp <span style="color: red"></span>
+                                <!--<input class="span1" name="duration" ng-disabled="true" data-ng-model="formData.day"
+                                       required onKeyUp="value=value.replace(/[^\d]/g,'') " value="" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">天
+                                <input ng-disabled="true" class="span1" name="duration" data-ng-model="formData.duration"
+                                required onKeyUp="value=value.replace(/[^\d]/g,'') " value="" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">小时-->
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">请假类型<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <div class="btn-group">
+                                    <label ng-repeat="value in leaveTypes" style="float: right">
+                                        <input  data-ng-disabled="value.id==leaveTypeExc&&!leaveTypeExcFlag()" type="radio" name="typeId" ng-model="formData.typeId" ng-value="value.id" ng-change="checkExchange(value)"/>
+                                        <span style="position: relative;top: 3px;margin-right: 20px">{{ value.type }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">开始时间<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <input class="span3" name="beginTime" type="date" data-ng-model="formTempData.beginTime"  required ng-change="getDay()"/>
+                                <select style="margin-left: 10px;width: 130px" ng-model="formTempData.dataHourB" ng-options="city.setHour for city in cm" ng-change="getHour()">
+                                </select>
+                                <select style="margin-left: 10px;width: 130px" ng-model="formTempData.minuteB" ng-options="city.setMinute for city in dm"  ng-change="getHour()">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group" >
+                            <label class="control-label">结束时间<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <input class="span3" name="endTime" type="date" data-ng-model="formTempData.endTime" required ng-change="getDay()"/>
+                                <select style="margin-left: 10px;width: 130px" ng-model="formTempData.dataHourE" ng-options="city.setHour for city in em" ng-change="getHour()">
+                                </select>
+                                <select style="margin-left: 10px;width: 130px" ng-model="formTempData.minuteE" ng-options="city.setMinute for city in dm" ng-change="getHour()">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">请假原因<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                            <div class="controls">
+                                <textarea class="span4" name="reason" type="text" data-ng-model="formData.reason"  required ></textarea>
+                            </div>
+                        </div>
+                        <div class="control-group" ng-show="formData.typeId==leaveTypeExc" >
+                            <div class="controls" style="margin-left: 78px;">
+                                <label class="checkbox-inline" for="newWorkOverDinner" style="display: inline;margin-right: 40px;">可公休天数<span style="margin-left: 5px;" class="badge badge-important" ng-bind="'剩余'+exchangeFormData.noPayExcT+'小时'"></span>
+                                    <input class="span1"style="margin:0;min-height: 20px;width: 20px;"  id="newWorkOverDinner" name="dinner" type="checkbox" data-ng-model="noPayExcCheck" ng-change="checkMax('nop',exchangeFormData,formData)"/>
+                                    <input style="width: 80px" ng-disabled="!noPayExcCheck" type="number" ng-model="formData.noPayExcT" min="0" max="{{exchangeFormData.noPayExcT}}" required
+                                           ng-keyup="checkMax('nop',exchangeFormData,formData)"/>
+                                </label>
+                                <label class="checkbox-inline input-xlarge" for="newWorkOverWeekend" style="display: inline;margin-right: 40px;">加班天数<span style="margin-left: 5px;" class="badge badge-important" ng-bind="'剩余'+exchangeFormData.payExcT+'小时 ; 剩余可调次数'+exchangeFormData.countExc+'次'"></span>
+                                    <input class="span1" style="margin:0;min-height: 20px;width: 20px;" id="newWorkOverWeekend" name="Weekend" type="checkbox" data-ng-model="payExcCheck" ng-change="checkMax('p',exchangeFormData,formData)"/>
+                                    <input style="width: 70px" ng-disabled="!payExcCheck" type="number" ng-model="formData.payExcT" min="0" max="2" required
+                                           ng-keyup="checkMax('p',exchangeFormData,formData)"/>
+                                </label>
+                                <label ng-show="exchangeFormData.yesterdayExcT&&exchangeFormData.yesterdayExcT>0" class="checkbox-inline input-xlarge" for="newWorkOverYesterday" style="display: inline;margin-right: 40px;">前一日加班<span style="margin-left: 5px;" class="badge badge-important" ng-bind="'剩余'+exchangeFormData.yesterdayExcT+'小时'"></span>
+                                    <input class="span1" style="margin:0;min-height: 20px;width: 20px;" id="newWorkOverYesterday" name="Yesterday" type="checkbox" data-ng-model="payExcYesterCheck" ng-change="checkMax('tp',exchangeFormData,formData)"/>
+                                    <input style="width: 80px" ng-disabled="!payExcYesterCheck" type="number" ng-model="formData.yesterdayExcT" min="0" max="2" required
+                                           ng-keyup="checkMax('tp',exchangeFormData,formData)" />
+                                </label>
+                            </div>
+                        </div>
+                        <p style="margin-left: 7%" class="text-error">{{errorTip}}</p>
+                    </div>
+                </div>
+                <div class="dataTables_paginate">
+                    <button  style="margin: 20px 0"  type="button" rows="5" class="btn btn-success" data-ng-disabled="!isOK()" data-ng-click="saveData()">
+                        <i class="icon-save"></i> <span class="text">提交</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

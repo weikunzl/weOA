@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                    <h5>员工列表</h5>
+                </div>
+                <div class="widget-content" >
+                <div class="widget-content nopadding">
+                    <div class="dataTables_wrapper">
+                        <div>
+                            <div class="dataTables_length form-horizontal"  style="width: 100%;">
+                                <div style="width: 96%;">
+                                    <style>
+                                        #employeeTypeSelectSearch option[value='3']{
+                                            color: red;
+                                        }
+                                    </style>
+                                    <select id="employeeTypeSelectSearch" style="margin-left:10px;width: 10%" ng-model="searchData.status"  ng-selected="$index==0" ng-options="statusItem.value as statusItem.text for statusItem in statusList" ng-change="listenChange()">
+                                        <!--<option ng-repeat="statusItem in " ng-value="statusItem.value" ng-class="{'text-error':statusItem.value==3}">
+                                            {{statusItem.text}}</option>-->
+                                    </select>
+                                    <input type="text" name="searchname" ng-model="searchData.employeeText" placeholder="员工姓名、简拼、工号" style="width: 12%;margin: 0 7px;" ng-keydown="enterSeacrh()" />
+                                    <button style="margin-left: 10px" type="button" class="btn btn-success" data-ng-click="loadGridData()">
+                                        <span class="text"><i class="icon-search"></i> 查询</span>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <style>
+                            .gridStyleEmp {
+                                border: 1px solid rgb(212, 212, 212);
+                                height: 400px;
+                                width: 100%;
+                            }
+                            .gridStyle a{
+                               color: #307DFF;
+                            }
+                        </style>
+                        <div class="gridStyleEmp" ng-grid="gridOptions" style="width: 100%"></div>
+
+                        <div class="ui-toolbar ui-widget-header">
+                            <!--<h5 style="float: right;margin-right: 60px">所得税合计：{{mainTotalTax}}元</h5>
+                            <h5 style="float: right;margin-right: 20px">{{searchData.timeFrom==searchData.timeTo?searchData.timeTo.replace('-','年')+'月,':searchData.timeFrom.replace('-','年')+'月'+' 至 '+searchData.timeTo.replace('-','年')+'月,'}}工资合计：{{mainTotalSalary}}元</h5>
+-->
+                            <div class="dataTables_paginate">
+                                <button class="btn" data-ng-click="loadGridData(true)" data-ng-disabled="!hasManyData" data-ng-hide="isLoading">
+                                        <span data-ng-switch on="hasManyData">
+                                            <span data-ng-switch-when="true"><i class="icon-download-alt"></i> 更多</span>
+                                            <span data-ng-switch-when="false"><i class="icon-twitter"></i> 暂无</span>
+                                        </span>
+                                </button>
+                                <img data-ng-show="isLoading" src="./img/loading.gif" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

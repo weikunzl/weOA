@@ -1,0 +1,103 @@
+<div class="widget-content nopadding" ng-controller="evectionListOwnCtrl">
+    <div class="dataTables_wrapper">
+        <div>
+            <div class="dataTables_length form-horizontal" style="width: 100%">
+                <div style="width: 96%;margin: 5px;">
+                    <span style="float: left;margin: 3px 10px">从</span><input type="date" name="timeFrom1" ng-model="searchData.beginTime" style="width: 150px;float: left"/>
+                    <span style="float: left;margin: 3px 10px">到</span><input type="date" name="timeTo1" ng-model="searchData.endTime" style="width: 150px;float: left"/>
+                    
+                   <!-- <span class="btn" style="margin: 0 10px;" data-placement="bottom" data-bs-popover="'evectionTypeOptions.html'">
+                        <span style="color: #808080">出差类型</span>
+                    </span>-->
+                    <div class="btn-group" style="margin-left: 10px">
+                        <label ng-repeat="value in vm.values" style="float: left">
+                            <input type="checkbox" ng-checked="true" ng-model="vm.selection['checked'+value.id]" value="{{value.id}}" ng-change="listenCheck('own')" />
+                            <span style="position: relative;top: 3px">{{value.type}}</span>&nbsp;&nbsp;
+                        </label>
+                        <label style="float: left">
+                            <input type="checkbox" ng-model="searchData.invalid" ng-change="loadGridData('own')" />
+                            <span style="position: relative;top: 3px;color: #d60000">已作废</span>&nbsp;&nbsp;
+                        </label>
+                    </div>
+                    <button style="margin-left: 10px" type="button" class="btn btn-success" data-ng-click="loadGridData('own')">
+                        <span class="text"><i class="icon-search"></i> 查询</span>
+                    </button>
+                    <button class="btn btn-info" style="float:right;">
+                        <span class="text"><a href="#!/evection/add" style="color: #ffffff"><i class="icon-tag"></i>出差</a></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered" style="border-bottom: 1px solid #cccccc;border-top: 1px solid #cccccc;" data-kz-table-fixed-header>
+            <thead>
+            <tr>
+                <th class="span1">
+                    员工姓名
+                </th>
+                <!--<th class="span1">-->
+                    <!--出差类型-->
+                <!--</th>-->
+                <th class="span2">
+                    出差开始时间
+                </th>
+                <th class="span2">
+                    出差结束时间
+                </th>
+                <th class="span1">
+                    出差时长
+                </th>
+                <th class="span2">
+                    出差原因
+                </th>
+                <th class="span1">
+                    状态
+                </th>
+                <th class="span2">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-class="{'delete-line':item.isDelete}" data-ng-repeat="item in data">
+                <td class="center">{{ item.employeeName }}</td>
+                <td class="center" >{{ parseDate(item.beginTime)| date : 'yyyy年MM月dd日 ' }};{{ parseDateWeek(item.beginTime)}}</td>
+                <td class="center" >{{ parseDate(item.endTime)| date : 'yyyy年MM月dd日 ' }};{{ parseDateWeek(item.endTime)}}</td>
+                <td class="center">{{ item.duration }}</td>
+                <td title="{{ item.reason }}">{{ item.reason }}</td>
+                <td class="center">{{ passTypeList[item.statusId] }}</td>
+                <td class="center" >
+                    <span class="btn-primary btn-small margin" data-ng-show="item.statusId == 4&&item.statusId != 3">
+                        <a data-ng-click="removeevection(item)" style="color: #ffffff"> <!-- href="#!/evection/remove/{{ item.evectionId }}" -->
+                            <i class="icon-external-link"></i> 销假</a>
+                    </span>
+                    <span class="btn-danger btn-small margin" >
+                        <a data-ng-click="deleteItem(item)" data-ng-show="item.invalid!=1" style="color: #ffffff"> <!-- href="#!/evection/remove/{{ item.evectionId }}" -->
+                            <i class="icon-remove"></i> 作废</a>
+                    </span>
+
+                    <span class="btn-primary btn-small margin"  data-ng-show="item.statusId ==0||item.statusId ==1||item.statusId ==5">
+                        <a href="#!/evection/edit/{{ item.evectionId }}" style="color: #ffffff">
+                            <i class="icon-edit"></i> 编辑</a>
+                    </span>
+
+                    <span class="btn-inverse btn-small margin">
+                        <a data-ng-click ="showTrackData(item.evectionId)" style="color: #ffffff">
+                            <i class="icon-truck"></i> 轨迹</a>
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="ui-toolbar ui-widget-header">
+            <div class="dataTables_paginate">
+                <button class="btn" data-ng-click="loadGridData('own',true)" data-ng-disabled="!hasManyData" data-ng-hide="isLoading">
+                        <span data-ng-switch on="hasManyData">
+                            <span data-ng-switch-when="true"><i class="icon-download-alt"></i> 更多</span>
+                            <span data-ng-switch-when="false"><i class="icon-twitter"></i> 暂无</span>
+                        </span>
+                </button>
+                <img data-ng-show="isLoading" src="./img/loading.gif" />
+            </div>
+        </div>
+    </div>
+
+</div>

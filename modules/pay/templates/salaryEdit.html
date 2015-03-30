@@ -1,0 +1,29 @@
+<div class="modal-dialog">
+        <div class="modal-header">
+            <button type="button" style="margin:5px 10px 0 0;" class="close" data-dismiss="modal"  ng-click="close()" aria-hidden="true">×</button>
+            <h5 class="modal-title">【薪资调整】部门 : {{opener.entity.deptName}},  员工 : {{opener.entity.employeeName}}</h5>
+        </div>
+        <div class="modal-body" style="position: relative;min-height: 300px;">
+
+            <div style="height: 100%;">
+                <div class="row-fluid">
+                    <form action="#" method="get" class="form-horizontal">
+                    <div class="control-group" ng-repeat="salaryType in salaryTypes">
+                        <label class="control-label">{{salaryType.salaryTypeName}}</label>
+                        <div class="controls">
+                           <input type="number" min="0" onkeyup="value=value.replace(/[^\d.]/g,0)" ng-model="opener.entity['salaryType'+salaryType.salaryTypeId]"
+                                   required  >
+                        </div>
+                    </div>
+                  </form>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true"  ng-click="close()">关闭</button>
+            <button type="button" class="btn btn-primary" ng-disabled="!isOK()" ng-click="submitSalaryEdit(opener.entity,this);" >提交</button>
+        </div>
+</div><!-- /.modal-dialog -->
+

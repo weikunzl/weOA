@@ -1,0 +1,90 @@
+{ "page" : 1,"pageSize":10,"totalServerItems" :17,
+"items" :[{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300,"overtimeTotal":120
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300,
+    "leave" :  [{
+        "leaveTypeId" : 1,
+        "leaveTypeTime" : 8,
+        "leaveTypeCost": 200
+    },{
+        "leaveTypeId" : 2,
+        "leaveTypeTime" : 8,
+        "leaveTypeCost": 100
+
+    }],
+    "otherSalaryType":[{
+        "salaryTypeId" : 7,
+        "salaryTypeCost" : 200
+    },{
+        "salaryTypeId" : 8,
+        "salaryTypeCost" : 300
+    },{
+        "salaryTypeId" : 10,
+        "salaryTypeCost" :1200
+    }]
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300,"overtimeTotal":120
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300,"overtimeTotal":120
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300
+
+
+},{
+   "salaryId":2,"payId":1,"employeeName":"lily","baseSalary":1200,"performance":100,"overtime":0,"totalSalary":1300, "tax":0,"exceptTaxSalary":1300,"overtimeTotal":120
+
+
+},{
+   "payId":2,"employeeName":"mike","baseSalary":1000,"performance":0,"overtime":10,"leaveDeducted":-10,"totalSalary":1000, "tax":10,"exceptTaxSalary":990,"overtimeTotal":120
+
+}]
+}

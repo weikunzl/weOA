@@ -1,0 +1,51 @@
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" style="margin:5px 10px 0 0;" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">{{modalTitle}}</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row-fluid">
+                <form action="#" method="get" class="form-horizontal">
+
+
+                <div class="control-group">
+                    <label class="control-label">员工姓名<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                    <div class="controls">
+                        <select data-ng-disabled="modalUpdate&&selectedInfo&&selectedInfo.employeeId==newEmployeeSelected.employeeId" ng-model="newEmployeeSelected" ng-options="newEmployee.employeeName for newEmployee in newEmployeeList"  required>
+                            <option value="">-- 请选择 --</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">部门<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                    <div class="controls">
+                        <!--<select ng-model="deptSelected" ng-options="dept.deptName for dept in deptDataSelect" required>
+                            <option value="">-- 请选择 --</option>
+                        </select>-->
+                       <div id="deptInputTree" />
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">角色<span style="margin-left: 5px;" class="badge badge-important">必填</span></label>
+                    <div class="controls">
+                        <select ng-model="roleSelected" ng-options="role.roleName for role in roleDataSelect" required>
+                        </select>
+                    </div>
+                </div>
+                </form>
+            </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            <button type="button" class="btn btn-primary" data-ng-disabled="!deptSelected||!roleSelected||!newEmployeeSelected" ng-click="submitNewEmployee(modalUpdate,this)" aria-hidden="true">提交</button>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+

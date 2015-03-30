@@ -1,0 +1,25 @@
+       <div class="wrapper" >
+            <div class="title"><div class="title_info"><img class="img-lock" style="position: relative;top: -4px" src="img/login_lock.png">{{title}}</div></div>
+            <dl class="xl_info clearfix">
+                <form name="loginForm" novalidate data-ng-submit="login()" >
+                    <dd><span class="icon"><img src="img/login_user.png"></span><input name="account" id="account" data-ng-model="user.account" type="text" placeholder="用户名" required autofocus /></dd>
+                    <dd><span class="icon"><img src="img/login_password.png"></span><input name="password" data-ng-model="user.password" type="password" placeholder="密码" required data-ng-minlength="6" /></dd>
+                    <dd><hr></dd>
+                    <dd>
+                        <button type="submit" class="login-btn" data-ng-disabled="loginForm.$invalid || isLoading">
+                            <span data-ng-show="isLoading"><img src="./img/loading-login.gif" alt="loading"/></span>
+                            <span data-ng-hide="isLoading">登录</span>
+                        </button>
+                    </dd>
+                    <div data-ng-show="loginForm.account.$dirty && loginForm.account.$invalid">
+                        <span data-ng-show="loginForm.account.$error.required" class="help-inline"><i class="icon-warning-sign"></i> 帐号不能为空哟~</span>
+                    </div>
+                    <div data-ng-show="loginForm.password.$dirty && loginForm.password.$invalid">
+                        <span data-ng-show="loginForm.password.$error.required" class="help-inline"><i class="icon-warning-sign"></i> 密码不能为空哟~</span>
+                        <span data-ng-show="loginForm.password.$error.minlength" class="help-inline"><i class="icon-warning-sign"></i> 密码不能少于六位哟~</span>
+                    </div>
+                </form>
+            </dl>
+        </div>
+        <div class="bg"></div>
+

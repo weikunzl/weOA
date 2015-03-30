@@ -1,0 +1,101 @@
+<div class="widget-content nopadding" ng-controller="evectionListCtrl">
+    <div class="dataTables_wrapper">
+        <div>
+            <div class="dataTables_length form-horizontal" style="width: 100%">
+                <div style="width: 96%;margin: 5px;">
+                    <span style="float: left;margin: 3px 10px">从</span><input type="date" name="timeFrom1" ng-model="searchData2.beginTime" style="width: 11%;float: left"/>
+                    <span style="float: left;margin: 3px 10px">到</span><input type="date" name="timeTo1" ng-model="searchData2.endTime" style="width: 11%;float: left"/>
+                   <!-- <select style="float: left;margin: 0 0 0 10px;width: 10%" ng-model="evectionTypeSelection2" ng-options="evectionType.id as evectionType.type for evectionType in evectionTypes" ng-change="listenCheck()">
+                        <option value="">全部</option>
+                    </select>-->
+                   <!-- <div class="btn-group" style="width:16%;float: left;margin: 0 0 0 10px;">
+                        <label ng-repeat="value in vm2.values" style="float: left">
+                            <input type="checkbox" ng-checked="true" ng-model="vm2.selection['checked'+value.id]" value="{{value.id}}" ng-change="listenCheck()" />
+                            <span style="position: relative;top: 3px">{{value.type}}</span>&nbsp;&nbsp;
+                        </label>
+                    </div>-->
+                    <input type="text" ng-model="searchData2.employeeText" placeholder="员工姓名、简拼、工号" style="width: 11%;margin: 0 4px;" ng-keydown="enterSeacrh()"/>
+
+                    <button style="margin-left: 10px" type="button" class="btn btn-success" data-ng-click="loadGridData()">
+                        <span class="text"><i class="icon-search"></i> 查询</span>
+                    </button>
+                    <div style="float:right;display: inline-block;margin-right: 0;">
+                        <button class="btn btn-warning" style="margin-left: 10px" data-placement="left" ng-show="employeeSelection.evectionId.length>1" data-bs-popover="'rejectAll.html'">
+                            <span class="text"><i class="icon-legal"></i> 批量驳回</span>
+                        </button>
+                        <button class="btn btn-success" style="margin-left: 10px" ng-show="employeeSelection.evectionId.length>1">
+                            <span class="text"><a  data-placement="left" data-bs-popover="'passAll.html'" style="color: #ffffff"><i class="icon-check"></i>批量同意</a></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered" style="border-bottom: 1px solid #cccccc;border-top: 1px solid #cccccc;" data-kz-table-fixed-header>
+            <thead>
+            <tr>
+                <th hidden="true">
+                    evectionId
+                </th>
+                <th  class="span1" >
+                    <input  type="checkbox" ng-model="chkall" ng-click="checkAll(chkall)"/>
+                </th>
+                <th class="span1">
+                    员工姓名
+                </th>
+                <th class="span2">
+                    出差开始时间
+                </th>
+                <th class="span2">
+                    出差结束时间
+                </th>
+                <th class="span1">
+                    出差天数
+                </th>
+                <th class="span2">
+                    出差原因
+                </th>
+                <th class="span1">
+                    状态
+                </th>
+                <th class="span2">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-class="{'info':item.employeeSelection,'delete-line':item.isDelete}" data-ng-repeat="item in data2">
+                <td hidden="true">{{ item.evectionId }}</td>
+                <td class="center" ><input type="checkbox"  ng-model="item.employeeSelection"  data-ng-click="toggleEmployeeSelection(item)"/></td>
+                <td class="center" data-ng-click="toggleEmployeeSelection(item)">{{ item.employeeName }}</td>
+                <td class="center" data-ng-click="toggleEmployeeSelection(item)" >{{ parseDate(item.beginTime)| date : 'yyyy年MM月dd日 ' }};{{ parseDateWeek(item.beginTime)}}</td>
+                <td class="center" data-ng-click="toggleEmployeeSelection(item)">{{ parseDate(item.endTime)| date : 'yyyy年MM月dd日 ' }};{{ parseDateWeek(item.endTime)}}</td>
+                <td class="center" data-ng-click="toggleEmployeeSelection(item)">{{ item.duration }}</td>
+                <td title="{{ item.reason }}" data-ng-click="toggleEmployeeSelection(item)">{{ item.reason }}</td>
+                <td class="center" data-ng-click="toggleEmployeeSelection(item)">{{ passTypeList2[item.statusId] }}</td>
+                <td class="center">
+                        <span class="btn-small btn-warning margin" data-ng-show="(item.statusId !=5)" data-trigger="click" data-unique="1" data-placement="left" data-bs-popover="'reject.html'">
+                            <a style="color: #ffffff" href=""><i class="icon-legal"></i> 驳回</a>
+                        </span>
+
+                        <span class="btn-success btn-small margin" data-ng-show="(item.statusId != 5)" data-trigger="click" data-unique="1" data-placement="left" data-bs-popover="'pass.html'">
+                            <a href="" style="color: #ffffff"><i class="icon-check"></i> 同意</a>
+                        </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="ui-toolbar ui-widget-header">
+            <div class="dataTables_paginate">
+                <button class="btn" data-ng-click="loadGridData(null,true);" data-ng-disabled="!hasManyData2" data-ng-hide="isLoading">
+                        <span data-ng-switch on="hasManyData2">
+                            <span data-ng-switch-when="true"><i class="icon-download-alt"></i> 更多</span>
+                            <span data-ng-switch-when="false"><i class="icon-twitter"></i> 暂无</span>
+                        </span>
+                </button>
+                <img data-ng-show="isLoading" src="./img/loading.gif" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

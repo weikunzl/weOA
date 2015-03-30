@@ -1,0 +1,51 @@
+[{
+    "day":1,
+    "doingType":[{
+        "doingTypeId" : 99999,
+            "doingTime": 1,
+        "doingBeginDate": "2014-01-01 10:30:00",
+            "doingEndDate":""
+    },{
+        "doingTypeId" : 29,
+        "doingTime": 1,
+        "doingBeginDate": "2014-01-01 10:00:00",
+        "doingEndDate":"2014-01-01 12:00:00"
+    }]
+},{
+    "day":2,
+    "doingType":[{
+        "doingTypeId" : 99999,
+        "doingTime": 4,
+        "doingBeginDate": "",
+        "doingEndDate":"2014-01-02 14:40:00"
+    }]
+},{
+    "day":8,
+    "doingType":[{
+        "doingTypeId" : 31,
+        "doingTime": 2,
+        "doingBeginDate": "2014-01-08 08:00:00",
+        "doingEndDate":"2014-01-08 10:00:00"
+    },{
+        "doingTypeId" : 29,
+        "doingTime": 1,
+        "doingBeginDate": "2014-01-08 15:30:00",
+        "doingEndDate":"2014-01-08 16:30:00"
+    }]
+},{
+        "day": 29,
+        "doingType": [{
+                "doingTypeId": 5,
+                "doingTime": 10,
+                "doingBeginDate": "2014-01-27 16:30:00",
+                "doingEndDate": "2014-01-29 18:30:00"
+            }]
+},{
+        "day": 30,
+        "doingType": [{
+                "doingTypeId": 5,
+                "doingTime": 8,
+                "doingBeginDate": "2014-01-29 14:30:00",
+                "doingEndDate": "2014-01-30 18:30:00"
+            }]
+}]
